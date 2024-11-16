@@ -1,0 +1,66 @@
+* {
+    font-family: Verdana, sans-serif;
+  }
+body {
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9;
+}
+h1 {
+    font-family: Georgia, serif;
+    color: #333;
+}
+.content {
+    flex-grow: 1;
+    padding: 20px;            
+}
+.problem {
+    font-size: 1.5em;
+    margin: 20px;
+}
+.input-container {
+    margin: 20px;
+}
+.input-box {
+    margin: 5px;
+    width: 80px;
+    padding: 5px;
+    font-size: 1em;
+    text-align: center;
+}
+.button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: teal;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: blue;
+}
+.button-hint {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: lightcoral;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button-hint:hover {
+    background-color: #FF0000;
+}
+.feedback {
+    font-size: 1.2em;
+    margin: 20px;
+}
+.correct {
+    color: green;
+}
+.incorrect {
+    color: red;
+}
