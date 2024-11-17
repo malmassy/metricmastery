@@ -2,8 +2,10 @@
     font-family: Verdana, sans-serif;
   }
 body {
+    justify-content: center;
     font-size: 14px;
     text-align: center;
+    align-items: center;
     margin: 0;
     padding: 20px;
     background-color: #f4f4f9;
@@ -11,6 +13,21 @@ body {
 h1 {
     font-family: Georgia, serif;
     color: #333;
+}
+table {
+    margin: auto;
+    border-collapse: collapse;
+    width: 60%;
+    max-width: 800px;
+    background-color: white;
+    border: 1px solid #ddd;
+    justify-content: left;
+}
+td {
+    padding: 5px; 
+    text-align: center; 
+    border: 1px solid black;
+    text-align: left;
 }
 .content {
     flex-grow: 1;

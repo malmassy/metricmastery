@@ -30,10 +30,7 @@ A problem takes the form "Convert m * 10^n i[u]^[uExp] to o[u]^[uExp]"
 */
 
 let quesM, quesN, i, o, u, uExpText; // Declare variables to store problem details
-
-// Now we'll store some info helpful to calculating the answer.
-
-let uExpVal, iPrefixVal, oPrefixVal, ansN;
+let uExpVal, iPrefixVal, oPrefixVal, ansN; // Helpers to calculating the answer.
 
 
 // Function to generate random numbers between min and max
@@ -86,24 +83,23 @@ function generateProblem() {
         <span id="quesM">${quesM}</span>
          × 10<span id="quesN"><sup>${quesN}</sup></span> 
         <span id="i">${i}</span>${u}<span id="uExpText1"><sup>${uExpText}</sup></span>
-        to ${o}<span id="o">${u}</span><span id="uExpText1"><sup>${uExpText}</sup></span>`;
+        to <span id="o">${o}${u}</span><span id="uExpText2"><sup>${uExpText}</sup></span>`;
 
     // Clear previous inputs and feedback
-    document.getElementById("input1").value = "";
-    document.getElementById("input2").value = "";
-    document.getElementById("input3").value = "";
-    document.getElementById("input4").value = "";
+    document.getElementById("ansM").value = "";
+    document.getElementById("ansN").value = "";
+    document.getElementById("ansUnit").value = "";
+    document.getElementById("ansUnitExp").value = "";
     document.getElementById("feedback").innerHTML = "";
 }
 
 function reset() {
     usedHint = false;
-    prefixHint.innerHTML="";
-    expHint.innerHTML="";
-    document.getElementById("input1").style.backgroundColor = "";
-    document.getElementById("input2").style.backgroundColor = "";
-    document.getElementById("input3").style.backgroundColor = "";
-    document.getElementById("input4").style.backgroundColor = "";
+    document.getElementById("hint").innerHTML="";
+    document.getElementById("ansM").style.backgroundColor = "";
+    document.getElementById("ansN").style.backgroundColor = "";
+    document.getElementById("ansUnit").style.backgroundColor = "";
+    document.getElementById("ansUnitExp").style.backgroundColor = "";
 }
 
 function updateAnswer() {
@@ -113,59 +109,53 @@ function updateAnswer() {
 
 // Function to check the student's answer
 function checkAnswer() {
-    const input1 = document.getElementById("input1").value;
-    const input2 = document.getElementById("input2").value; // Currently not validated
-    const input3 = document.getElementById("input3").value;
-    const input4 = document.getElementById("input4").value;
+    const ansMSubmit = document.getElementById("ansM").value;
+    const ansNSubmit = document.getElementById("ansN").value; // Currently not validated
+    const ansUnitSubmit = document.getElementById("ansUnit").value;
+    const ansUnitExpSubmit = document.getElementById("ansUnitExp").value;
 
-    const ans1 = m;
-    console.log(unitExps.get(u));
+    const ansM = quesM;
     // const ans2 = n + unitExps.get(uExp) * (prefixes.get(i) - prefixes.get(o));
-    const ans3 = o + u;
-    const ans4 = uExp;
-
-    console.log(ans1);
-    console.log(ans2);
-    console.log(ans3);
-    console.log(ans4);
+    const ansUnit = o + u;
+    const ansUnitExp = uExpText;
 
     let feedback = document.getElementById("feedback");
     let correct = true;
 
-    document.getElementById("input1").style.backgroundColor = "";
-    document.getElementById("input2").style.backgroundColor = "";
-    document.getElementById("input3").style.backgroundColor = "";
-    document.getElementById("input4").style.backgroundColor = "";
+    document.getElementById("ansM").style.backgroundColor = "";
+    document.getElementById("ansN").style.backgroundColor = "";
+    document.getElementById("ansUnit").style.backgroundColor = "";
+    document.getElementById("ansUnitExp").style.backgroundColor = "";
     
     // Check each answer and update background color
-    if (input1 == ans1) {
-        document.getElementById("input1").style.backgroundColor = "lightgreen";
+    if (ansMSubmit == ansM) {
+        document.getElementById("ansM").style.backgroundColor = "lightgreen";
     } else {
-        console.log(`Number: Answered ${input1} instead of ${ans1}.`);
-        document.getElementById("input1").style.backgroundColor = "lightcoral";
+        console.log(`Number: Answered ${ansMSubmit} instead of ${ansM}.`);
+        document.getElementById("ansM").style.backgroundColor = "lightcoral";
         correct = false;
     }
 
-    if (input2 == ans2) {
-        document.getElementById("input2").style.backgroundColor = "lightgreen";
+    if (ansNSubmit == ansN) {
+        document.getElementById("ansN").style.backgroundColor = "lightgreen";
     } else {
-        console.log(`Exponent: Answered ${input2} instead of ${ans2}.`);
-        document.getElementById("input2").style.backgroundColor = "lightcoral";
+        console.log(`Exponent: Answered ${ansNSubmit} instead of ${ansN}.`);
+        document.getElementById("ansN").style.backgroundColor = "lightcoral";
         correct = false;
     }
 
-    if (input3 == ans3) {
-        document.getElementById("input3").style.backgroundColor = "lightgreen";
+    if (ansUnitSubmit == ansUnit) {
+        document.getElementById("ansUnit").style.backgroundColor = "lightgreen";
     } else {
-        console.log(`unitExps: Answered ${input3} instead of ${ans3}.`);
-        document.getElementById("input3").style.backgroundColor = "lightcoral";
+        console.log(`unitExps: Answered ${ansUnitSubmit} instead of ${ansUnit}.`);
+        document.getElementById("ansUnit").style.backgroundColor = "lightcoral";
         correct = false;
     }
-    if (input4 == ans4 || (input4 == 1 && ans4 =="")) {
-        document.getElementById("input4").style.backgroundColor = "lightgreen";
+    if (ansUnitExpSubmit == ansUnitExp || (ansUnitExpSubmit == 1 && ansUnitExp =="")) {
+        document.getElementById("ansUnitExp").style.backgroundColor = "lightgreen";
     } else {
-        console.log(`Power: Answered ${input4} instead of ${ans4}.`);
-        document.getElementById("input4").style.backgroundColor = "lightcoral";
+        console.log(`Power: Answered ${ansUnitExpSubmit} instead of ${ansUnitExp}.`);
+        document.getElementById("ansUnitExp").style.backgroundColor = "lightcoral";
         correct = false;
     }
 
@@ -194,9 +184,9 @@ function seePrefixes() {
             <body>
                 <h2>Metric Prefixes</h2>
                 <table>
-                    <tr><th>Prefix</th><th>Power of 10</th></tr>
+                    <tr><th>Prefix</th><th>Exponent</th></tr>
                     ${Array.from(prefixes.entries()).map(([prefix, power]) => `
-                        <tr><td>${prefix}</td><td>10<sup>${power}</sup></td></tr>
+                        <tr><td>${prefix}</td><td>${power}</tr>
                     `).join('')}
                 </table>
             </body>
@@ -208,42 +198,82 @@ function seePrefixes() {
     newWindow.document.close();
 }
 
-function showPrefixHint() {
-    inputPrefixVal = prefixes.get(i);
-    outputPrefixVal = prefixes.get(o);
+function showHint() {
+    const tableHTML = `
+        <table class="table" style="justify-content: left;">
+            <tr><td><b>Number</b></td><td>For number, just pull the number from the question down. <span onmouseover="showNumberHint()" onmouseleave="clearNumberHint()"><u>Hint</u></span></td>
+            <tr><td><b>Unit</b></td><td>For unit, just pull the output units from the question down. <span onmouseover="showUnitHint()" onmouseleave="clearUnitHint()"><u>Hint</u></span></td>
+            <tr><td><b>Unit Exponent</b></td><td>For unit exponent, just pull the unit exponent from the question down.</br><span id="noUnitExp">If there is no unit exponent, just leave it blank.</span> <span onmouseover="showUnitExpHint()" onmouseleave="clearUnitExpHint()"><u>Hint</u></span></td>
+            <tr><td><b>Exponent</b></td><td>
+            <table>
+            <tr><td>Input Prefix</td><td>${i} = ${iPrefixVal}</td></tr>
+            <tr><td>Output Prefix</td><td>${o} = ${oPrefixVal}</td></tr>
+            <tr><td>Unit Exponent</td><td>${uExpVal}</td></tr>
+            <tr><td>Question Exponent</td><td>${quesN}</td></tr>
+            <tr style="line-height: 1.5;"><td><b>Answer Exponent</b></td><td>
+                <div>(${iPrefixVal} - ${oPrefixVal}) * ${uExpVal} + ${quesN}</div>
+                <div>(${iPrefixVal - oPrefixVal}) * ${uExpVal} + ${quesN}</div>
+                <div>${(iPrefixVal - oPrefixVal) * uExpVal} + ${quesN}</div>
 
-    if (inputPrefixVal == 0) {
-        iPrefixText = "Base unit ";
-    } else {
-        iPrefixText = i;
-    }
-
-    if (outputPrefixVal == 0) {
-        oPrefixText = "Base unit ";
-    } else {
-        oPrefixText = o;
-    }
+            <b><div id="expHint" onmouseover="showExpHint()" onmouseleave="clearExpHint()"><u>${ansN}</u></b>
+            </td></tr>
 
 
-    hintText = `${iPrefixText} = ${inputPrefixVal}</br>${oPrefixText} = ${outputPrefixVal}</br></br>`
 
-    usedHint = true;
-
-    prefixHint.innerHTML = hintText;                  
+            </table>
+            </td></tr>
+        </table>
+        ` 
+    let hint = document.getElementById("hint");
+    hint.innerHTML = tableHTML;
 }
 
-function showHint() {
-    expAnsText1 = `${n} + [${unitExps.get(uExp)} * (${prefixes.get(i)} - ${prefixes.get(o)})]`; 
-    expAnsText2 = `${n} + [${unitExps.get(uExp)} * ${prefixes.get(i) - prefixes.get(o)}]`;
-    expAnsText3 = `${n} + ${unitExps.get(uExp) * (prefixes.get(i) - prefixes.get(o))}`;
+function showNumberHint() {
+    document.getElementById("quesM").style.backgroundColor = "lightcoral";
+}
 
-    hintText = `
-        Q + [U * (I-O)]</br></br>
-        ${expAnsText1}</br>
-        ${expAnsText2}</br>
-        ${expAnsText3}</br>
-        ${ans2}
-        `;
+function showNumberHint() {
+    document.getElementById("quesM").style.backgroundColor = "aqua";
+    document.getElementById("ansM").style.backgroundColor = "aqua";
+}
 
-        expHint.innerHTML = hintText;            
+function clearNumberHint() {
+    document.getElementById("quesM").style.backgroundColor = "";
+    document.getElementById("ansM").style.backgroundColor = "";    
+}
+
+function showUnitHint() {
+    document.getElementById("o").style.backgroundColor = "aqua";
+    document.getElementById("ansUnit").style.backgroundColor = "aqua";
+}
+
+function clearUnitHint() {
+    document.getElementById("o").style.backgroundColor = "";
+    document.getElementById("ansUnit").style.backgroundColor = "";    
+}
+
+function showUnitExpHint() {
+    document.getElementById("uExpText1").style.backgroundColor = "aqua";
+    document.getElementById("uExpText2").style.backgroundColor = "aqua";
+    if (uExpVal == 1) {
+        document.getElementById("noUnitExp").style.backgroundColor = "aqua";
+    }
+    document.getElementById("ansUnitExp").style.backgroundColor = "aqua";
+}
+
+function clearUnitExpHint() {
+    document.getElementById("uExpText1").style.backgroundColor = "";
+    document.getElementById("uExpText2").style.backgroundColor = "";
+    document.getElementById("noUnitExp").style.backgroundColor = "";
+    document.getElementById("ansUnitExp").style.backgroundColor = "";    
+}
+
+function showExpHint() {
+    document.getElementById("expHint").style.backgroundColor = "aqua";
+    document.getElementById("ansN").style.backgroundColor = "aqua";
+}
+
+function clearExpHint() {
+    document.getElementById("expHint").style.backgroundColor = "";
+    document.getElementById("ansN").style.backgroundColor = "";    
 }
