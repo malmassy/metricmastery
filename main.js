@@ -95,6 +95,7 @@ function generateProblem() {
 
 function reset() {
     usedHint = false;
+    document.getElementById("answer").innerHTML="";
     document.getElementById("hint").innerHTML="";
     document.getElementById("ansM").style.backgroundColor = "";
     document.getElementById("ansN").style.backgroundColor = "";
@@ -104,7 +105,9 @@ function reset() {
 
 function updateAnswer() {
     let answer = document.getElementById("answer");
-    // answer.innerHTML = "blah";
+    answer.innerHTML = `${document.getElementById("ansM").value} x 10<sup>${document.getElementById("ansN").value}</sup>
+    ${document.getElementById("ansUnit").value}<sup>${document.getElementById("ansUnitExp").value}</sup>
+    `;
 }
 
 // Function to check the student's answer
@@ -205,7 +208,7 @@ function showHint() {
             <tr><td><b>Unit</b></td><td>For unit, just pull the output units from the question down. <span onmouseover="showUnitHint()" onmouseleave="clearUnitHint()"><u>Hint</u></span></td>
             <tr><td><b>Unit Exponent</b></td><td>For unit exponent, just pull the unit exponent from the question down.</br><span id="noUnitExp">If there is no unit exponent, just leave it blank.</span> <span onmouseover="showUnitExpHint()" onmouseleave="clearUnitExpHint()"><u>Hint</u></span></td>
             <tr><td><b>Exponent</b></td><td>
-            <table>
+            <table style="width: 90%;">
             <tr><td>Input Prefix</td><td>${i} = ${iPrefixVal}</td></tr>
             <tr><td>Output Prefix</td><td>${o} = ${oPrefixVal}</td></tr>
             <tr><td>Unit Exponent</td><td>${uExpVal}</td></tr>
