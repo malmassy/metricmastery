@@ -18,9 +18,23 @@ const unitExps = new Map([
 ]);
 const unitExpsArray = Array.from(unitExps.keys());
 
-let m, n, i, o, u, uExp, ans2, usedHint; // Declare variables to store problem details
+/*
+A problem takes the form "Convert m * 10^n i[u]^[uExp] to o[u]^[uExp]"
 
-usedHint = false;
+"m" is a 2 decimal 1.00 <= m < 10.00.
+"n" is an integer +/-(1.00 <= n <= 10)
+"i" is the metric prefix on the input units (e.g. "c" for centi-)
+"o" is the metric prefex on the output units (e.g. "n" for nano-)
+"u" is the type of metric unit (e.g. "L" for liters, "m" or meters) (SAME FOR BOTH INPUT AND OUTPUT)
+"uExp" is whether the metric units are squared or cubed (SAME FOR BOTH INPUT AND OUTPUT)
+*/
+
+let quesM, quesN, i, o, u, uExpText; // Declare variables to store problem details
+
+// Now we'll store some info helpful to calculating the answer.
+
+let uExpVal, iPrefixVal, oPrefixVal, ansN;
+
 
 // Function to generate random numbers between min and max
 function getRandomNumber(min, max, decimals) {
@@ -47,24 +61,32 @@ function getUnitType() {
 // Function to generate a new problem
 function generateProblem() {
     reset();
-    m = getRandomNumber(1, 10, 2); // Random number with 2 decimals
-    n = getRandomInteger(-10, 10); // Random integer between -10 and 10
+    quesM = getRandomNumber(1, 10, 2); // Random number with 2 decimals
+    quesN = getRandomInteger(-10, 10); // Random integer between -10 and 10
     u = getRandomElement(units);
-    uExp = getRandomElement(unitExpsArray);
     i = getRandomElement(prefixesArray); // Random prefix for "a"
     o = getRandomElement(prefixesArray); // Random prefix for "b"
+    uExpText = getRandomElement(unitExpsArray);
 
+    uExpVal = unitExps.get(uExpText);
+    iPrefixVal = prefixes.get(i);
+    oPrefixVal = prefixes.get(o);
 
-    ans2 = n + unitExps.get(uExp) * (prefixes.get(i) - prefixes.get(o));
+    ansN = quesN + uExpVal * (iPrefixVal - oPrefixVal);
 
     // Ensure prefixes are different
+    // Don't let the output be "micro" so they don't have to type "mu"...
     if (i === o || o === "&mu;") {
         return generateProblem();
     }
 
     // Display the problem
     const problemElement = document.getElementById("problem");
-    problemElement.innerHTML = `${m} × 10<sup>${n}</sup> ${i}${u}${uExp ? `<sup>${uExp}</sup>` : ""} to ${o}${u}${uExp ? `<sup>${uExp}</sup>` : ""}`;
+    problemElement.innerHTML = `
+        <span id="quesM">${quesM}</span>
+         × 10<span id="quesN"><sup>${quesN}</sup></span> 
+        <span id="i">${i}</span>${u}<span id="uExpText1"><sup>${uExpText}</sup></span>
+        to ${o}<span id="o">${u}</span><span id="uExpText1"><sup>${uExpText}</sup></span>`;
 
     // Clear previous inputs and feedback
     document.getElementById("input1").value = "";
