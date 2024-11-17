@@ -137,7 +137,7 @@ function checkAnswer() {
     if (ansMSubmit == ansM) {
         document.getElementById("ansM").style.backgroundColor = "lightgreen";
     } else {
-        console.log(`Number: Answered ${ansMSubmit} instead of ${ansM}.`);
+        // console.log(`Number: Answered ${ansMSubmit} instead of ${ansM}.`);
         document.getElementById("ansM").style.backgroundColor = "lightcoral";
         correct = false;
     }
@@ -145,7 +145,7 @@ function checkAnswer() {
     if (ansNSubmit == ansN) {
         document.getElementById("ansN").style.backgroundColor = "lightgreen";
     } else {
-        console.log(`Exponent: Answered ${ansNSubmit} instead of ${ansN}.`);
+        // console.log(`Exponent: Answered ${ansNSubmit} instead of ${ansN}.`);
         document.getElementById("ansN").style.backgroundColor = "lightcoral";
         correct = false;
     }
@@ -153,14 +153,14 @@ function checkAnswer() {
     if (ansUnitSubmit == ansUnit) {
         document.getElementById("ansUnit").style.backgroundColor = "lightgreen";
     } else {
-        console.log(`unitExps: Answered ${ansUnitSubmit} instead of ${ansUnit}.`);
+        // console.log(`unitExps: Answered ${ansUnitSubmit} instead of ${ansUnit}.`);
         document.getElementById("ansUnit").style.backgroundColor = "lightcoral";
         correct = false;
     }
     if (ansUnitExpSubmit == ansUnitExp || (ansUnitExpSubmit == 1 && ansUnitExp =="")) {
         document.getElementById("ansUnitExp").style.backgroundColor = "lightgreen";
     } else {
-        console.log(`Power: Answered ${ansUnitExpSubmit} instead of ${ansUnitExp}.`);
+        // console.log(`Power: Answered ${ansUnitExpSubmit} instead of ${ansUnitExp}.`);
         document.getElementById("ansUnitExp").style.backgroundColor = "lightcoral";
         correct = false;
     }
@@ -172,9 +172,9 @@ function checkAnswer() {
     if (correct) {
         feedback.innerHTML = "Correct! Well done!";
         feedback.className = "feedback correct";
-        sanity.innerHTML = `It makes sense that your answer exponent (${ansNSubmit}) is ${ansCompareText} than the question
+        sanity.innerHTML = `<div class="sanity">It makes sense that your answer exponent (${ansNSubmit}) is ${ansCompareText} than the question
         exponent (${quesN}) because the output units (${o}, ${oPrefixVal}) are ${unitsCompareText} than the input units (${i}, ${iPrefixVal}).
-        `
+        </div>`
     } else {
         feedback.innerHTML = "Incorrect. Try again!";
         feedback.className = "feedback incorrect";

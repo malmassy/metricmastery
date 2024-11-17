@@ -17,7 +17,7 @@ h1 {
 table {
     margin: auto;
     border-collapse: collapse;
-    width: 60%;
+    width: 80%;
     max-width: 800px;
     background-color: white;
     border: 1px solid #ddd;
@@ -28,10 +28,6 @@ td {
     text-align: center; 
     border: 1px solid black;
     text-align: left;
-}
-.content {
-    flex-grow: 1;
-    padding: 20px;            
 }
 .problem {
     font-size: 1.5em;
@@ -75,11 +71,15 @@ td {
     font-size: 1.2em;
     margin: 20px;
 }
+
 .sanity {
     font-size: 1.2em;
-    margin: 20px;
+    margin: auto;
     font-style: italic;
+    width: 70%;
+    padding: 10px;
 }
+
 .correct {
     color: green;
 }
