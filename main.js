@@ -202,6 +202,15 @@ function seePrefixes() {
 }
 
 function showHint() {
+    let hint = document.getElementById("hint");
+    if (hint.innerHTML != "") {
+        hint.innerHTML = "";
+        document.getElementById("button-hint").innerHTML="Show Hints";
+        return;
+    }
+
+    document.getElementById("button-hint").innerHTML="Hide Hints";
+
     const tableHTML = `
         <table class="table" style="justify-content: left;">
             <tr><td><b>Number</b></td><td>For number, just pull the number from the question down. <span onmouseover="showNumberHint()" onmouseleave="clearNumberHint()"><u>Hint</u></span></td>
@@ -227,7 +236,6 @@ function showHint() {
             </td></tr>
         </table>
         ` 
-    let hint = document.getElementById("hint");
     hint.innerHTML = tableHTML;
 }
 
