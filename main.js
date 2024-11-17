@@ -90,17 +90,19 @@ function generateProblem() {
     document.getElementById("ansN").value = "";
     document.getElementById("ansUnit").value = "";
     document.getElementById("ansUnitExp").value = "";
-    document.getElementById("feedback").innerHTML = "";
 }
 
 function reset() {
     usedHint = false;
     document.getElementById("answer").innerHTML="";
     document.getElementById("hint").innerHTML="";
+    document.getElementById("button-hint").innerHTML="Show Hints";
     document.getElementById("ansM").style.backgroundColor = "";
     document.getElementById("ansN").style.backgroundColor = "";
     document.getElementById("ansUnit").style.backgroundColor = "";
     document.getElementById("ansUnitExp").style.backgroundColor = "";
+    document.getElementById("feedback").innerHTML = "";
+    document.getElementById("sanity").innerHTML = "";
 }
 
 function updateAnswer() {
@@ -123,6 +125,7 @@ function checkAnswer() {
     const ansUnitExp = uExpText;
 
     let feedback = document.getElementById("feedback");
+    let sanity = document.getElementById("sanity");
     let correct = true;
 
     document.getElementById("ansM").style.backgroundColor = "";
@@ -162,10 +165,16 @@ function checkAnswer() {
         correct = false;
     }
 
+    ansCompareText = (ansNSubmit > quesN) ? 'greater' : 'less';
+    unitsCompareText = (oPrefixVal > iPrefixVal) ? 'bigger' : 'smaller';
+
     // Provide feedback
     if (correct) {
         feedback.innerHTML = "Correct! Well done!";
         feedback.className = "feedback correct";
+        sanity.innerHTML = `It makes sense that your answer exponent (${ansNSubmit}) is ${ansCompareText} than the question
+        exponent (${quesN}) because the output units (${o}, ${oPrefixVal}) are ${unitsCompareText} than the input units (${i}, ${iPrefixVal}).
+        `
     } else {
         feedback.innerHTML = "Incorrect. Try again!";
         feedback.className = "feedback incorrect";
