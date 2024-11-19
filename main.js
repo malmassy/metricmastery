@@ -103,6 +103,7 @@ function reset() {
     document.getElementById("ansUnitExp").style.backgroundColor = "";
     document.getElementById("feedback").innerHTML = "";
     document.getElementById("sanity").innerHTML = "";
+    document.getElementById("scratch-work").value = "";
 }
 
 function updateAnswer() {
