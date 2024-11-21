@@ -86,3 +86,50 @@ td {
 .incorrect {
     color: red;
 }
+
+#feedback-bar {
+  width: 80%;
+  height: 50px;
+  margin: 20px auto;
+  position: relative;
+  display: flex;
+}
+
+.bar-segment {
+  flex: 1;
+  height: 100%;
+}
+
+.indicator {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background-color: black;
+}
+
+.red {
+  background-color: red;
+}
+
+.light-green {
+  background-color: lightgreen;
+}
+
+.medium-green {
+  background-color: greenyellow;
+}
+
+.bright-green {
+  background-color: lime;
+}
+
+.label {
+  position: absolute;
+  top: -20px;
+  font-size: 0.9em;
+  background: white;
+  padding: 2px 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}

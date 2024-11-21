@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Answer Feedback</title>
+  <title>Estimation</title>
   <link rel="stylesheet" href="main.css"></head>
 </head>
 <body>
   <h1>Answer the Question</h1>
-  <div class="question" id="question"></div>
-  <div class="input-section">
+  <div class="problem" id="question"></div>
+  <div class="input-container">
     <input type="number" id="answer" placeholder="Your answer">
     <button id="submit">Submit</button>
   </div>
   <div id="feedback-bar">
-    <div class="bar-segment red"></div>
-    <div class="bar-segment light-green"></div>
-    <div class="bar-segment medium-green"></div>
-    <div class="bar-segment bright-green"></div>
-    <div class="bar-segment medium-green"></div>
-    <div class="bar-segment light-green"></div>
-    <div class="bar-segment red"></div>
+    <div class="bar-segment red"><span>0 pts</span></div>
+    <div class="bar-segment light-green"><span>1 pt</span></div>
+    <div class="bar-segment medium-green"><span>3 pts</span></div>
+    <div class="bar-segment bright-green"><span>5 pts</span></div>
+    <div class="bar-segment medium-green"><span>3 pts</span></div>
+    <div class="bar-segment light-green"><span>1 pt</span></div>
+    <div class="bar-segment red"><span>0 pts</span></div>
     <div class="indicator" id="correct-indicator">
       <div class="label" id="correct-label"></div>
     </div>
