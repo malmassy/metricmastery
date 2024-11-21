@@ -34,8 +34,10 @@
       answerInput.value = "";
       resultElem.textContent = "";
       correctIndicator.style.left = "50%";
+      correctIndicator.hidden = true;
+      userIndicator.hidden = true;
       userIndicator.style.left = "-10px"; // Reset the user indicator
-      correctLabel.innerHTML = `Correct Answer: ${currentQuestion.answer}${currentQuestion.unit}`;
+      // correctLabel.innerHTML = `Correct Answer: ${currentQuestion.answer}${currentQuestion.unit}`;
     }
 
     function handleSubmit() {
