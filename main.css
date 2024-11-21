@@ -109,19 +109,19 @@ td {
 }
 
 .red {
-  background-color: red;
+  background-color: #fff;
 }
 
 .light-green {
-  background-color: lightgreen;
+  background-color: #999;
 }
 
 .medium-green {
-  background-color: greenyellow;
+  background-color: #88ee88;
 }
 
 .bright-green {
-  background-color: lime;
+  background-color: #00ee00;
 }
 
 .label {

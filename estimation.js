@@ -37,7 +37,7 @@
       correctIndicator.hidden = true;
       userIndicator.hidden = true;
       userIndicator.style.left = "-10px"; // Reset the user indicator
-      // correctLabel.innerHTML = `Correct Answer: ${currentQuestion.answer}${currentQuestion.unit}`;
+      correctLabel.innerHTML = `Correct Answer: ${currentQuestion.answer}${currentQuestion.unit}`;
     }
 
     function handleSubmit() {
@@ -59,27 +59,27 @@
       userIndicator.style.left = `${Math.min(Math.max(userPosition, 0), barWidth - 2)}px`;
       userLabel.innerHTML = `Your Answer: ${userAnswer}${currentQuestion.unit}`;
 
+      correctIndicator.hidden = false;
+      userIndicator.hidden = false;
+
       // Feedback for the result
       let points = 0;
-      let feedback = `You were ${absoluteError.toFixed(1)}${currentQuestion.unit} (${Math.abs(
+      let feedback = `The correct answer is ${currentQuestion.answer}${currentQuestion.unit}.</br></br>Your answer (${userAnswer}${currentQuestion.unit}) is ${Math.abs(
         percentageError.toFixed(1)
-      )}%) `;
+      )}% away from the correct answer. `;
 
       if (Math.abs(percentageError) <= 5) {
-        feedback += "too close. Excellent!";
-        points = 3;
+        points = 5;
       } else if (Math.abs(percentageError) <= 10) {
-        feedback += "too close. Good job!";
-        points = 2;
+        points = 3;
       } else if (Math.abs(percentageError) <= 20) {
-        feedback += "away. Not bad.";
         points = 1;
       } else {
-        feedback += "off. Try again!";
+        //feedback += "off. Try again!";
       }
 
       feedback += ` This is worth ${points} point${points === 1 ? "" : "s"}.`;
-      resultElem.textContent = feedback;
+      resultElem.innerHTML = feedback;
     }
 
     submitButton.addEventListener("click", handleSubmit);
