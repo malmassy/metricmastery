@@ -110,6 +110,7 @@ td {
 
 .red {
   background-color: #fff;
+  flex: 1.15;
 }
 
 .light-green {
@@ -118,6 +119,7 @@ td {
 
 .medium-green {
   background-color: #88ee88;
+  flex: 0.5;
 }
 
 .bright-green {
