@@ -108,7 +108,12 @@ function reset() {
 
 function updateAnswer() {
     let answer = document.getElementById("answer");
-    answer.innerHTML = `<i>${document.getElementById("problem").innerHTML} =</i> <b>${document.getElementById("ansM").value} x 10<sup>${document.getElementById("ansN").value}</sup>
+    let input_question = `
+        <span id="quesM">${quesM}</span>
+         × 10<span id="quesN"><sup>${quesN}</sup></span> 
+        <span id="i">${i}</span>${u}<span id="uExpText1"><sup>${uExpText}</sup></span>`;
+
+    answer.innerHTML = `<i>${input_question} =</i> <b>${document.getElementById("ansM").value} x 10<sup>${document.getElementById("ansN").value}</sup>
     ${document.getElementById("ansUnit").value}<sup>${document.getElementById("ansUnitExp").value}</sup></b>
     `;
 }
