@@ -73,7 +73,7 @@ function generateProblem() {
 
     // Ensure prefixes are different
     // Don't let the output be "micro" so they don't have to type "mu"...
-    if (i === o || o === "&mu;") {
+    if (i === o || o === "&mu;" || Math.abs(ansN) > 41) {
         return generateProblem();
     }
 
@@ -90,6 +90,44 @@ function generateProblem() {
     document.getElementById("ansN").value = "";
     document.getElementById("ansUnit").value = "";
     document.getElementById("ansUnitExp").value = "";
+
+    generatePreSanity();
+}
+
+function generatePreSanity() {
+        document.getElementById("presanity").innerHTML = `<p style="font-size: 16px; font-weight: bold;">Do you expect the exponent of your answer to be bigger or smaller than the exponent of the question?</p>
+        <p style="font-size: 14px;">
+            The exponent for the "Input unit prefix" <b>(${i})</b>
+            is
+            <select id="unitComparison">
+                <option value=""></option>
+                <option value="bigger">bigger</option>
+                <option value="smaller">smaller</option>
+            </select>
+            than the exponent for the "output unit prefix" <b>(${o})</b>.</br>This means that one 
+            <input type="text" id="singularUnit" placeholder="bigger unit" style="width: 120px;">
+            is made up of many 
+            <input type="text" id="pluralUnit" placeholder="smaller units" style="width: 120px;">.</br>
+            When converting from
+            <input type="text" id="inputUnit" placeholder="input unit" style="width: 120px;">
+            to
+            <input type="text" id="outputUnit" placeholder="output unit" style="width: 120px;">,
+            you will need 
+            <select id="unitComparison">
+                <option value=""></option>
+                <option value="more">more</option>
+                <option value="less">less</option>
+            </select>
+            of the output units to be the same size as the input units.
+             </br>
+            I expect the exponent of my answer to be 
+            <select id="exponentComparison">
+                <option value=""></option>
+                <option value="bigger">bigger</option>
+                <option value="smaller">smaller</option>
+            </select>
+            than the exponent of the question <b>(${quesN})</b>.
+        </p>`
 }
 
 function reset() {

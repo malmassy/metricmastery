@@ -7,14 +7,15 @@
 <link rel="stylesheet" href="main.css"></head>
 <body>
     <h1>Metric Conversion Practice</h1>
-    <div>A question takes the form:</br><br> <b>Number</b> x 10<sup><b>Exponent</b></sup> <b>[Input-Prefix]</b><i>[Unit-Type]</i><sup><b>[Unit Exponent]</b></sup> to <b>[Output-Prefix]</b><i>[Unit-Type]</i><sup><b>[Unit Exponent]</b></sup></div>
     <div class="problem" id="problem">
         Click "Generate" to get a new problem!
     </div>
     <button class="button" onclick="generateProblem()">New Problem</button>
 
+    <div id="presanity"></div>
+
     <div class="input-container">
-        <label for="ansM">Your Answer:</label><br>
+        <label for="ansM"><b>Your Answer:</b></label><br>
         <input type="text" id="ansM" class="input-box" placeholder="Number" oninput="updateAnswer()"> × 10<sup>
         <input type="text" id="ansN" class="input-box" placeholder="Exponent" oninput="updateAnswer()"></sup>
         <input type="text" id="ansUnit" class="input-box" placeholder="Unit" oninput="updateAnswer()"> <sup>

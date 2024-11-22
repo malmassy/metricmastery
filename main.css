@@ -48,6 +48,14 @@ td {
     border-left: 2px;
     border-right: 2px;
 }
+#presanity {
+    padding: 20px; 
+    border: 1px solid #ccc; 
+    width: 70%; 
+    margin: 20px auto;
+    line-height: 2;
+    background-color: #f9f9f9;
+}
 #answer {
     font-size: 2em;
     margin: 20px;
