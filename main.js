@@ -108,8 +108,8 @@ function reset() {
 
 function updateAnswer() {
     let answer = document.getElementById("answer");
-    answer.innerHTML = `${document.getElementById("ansM").value} x 10<sup>${document.getElementById("ansN").value}</sup>
-    ${document.getElementById("ansUnit").value}<sup>${document.getElementById("ansUnitExp").value}</sup>
+    answer.innerHTML = `<i>${document.getElementById("problem").innerHTML} =</i> <b>${document.getElementById("ansM").value} x 10<sup>${document.getElementById("ansN").value}</sup>
+    ${document.getElementById("ansUnit").value}<sup>${document.getElementById("ansUnitExp").value}</sup></b>
     `;
 }
 
@@ -184,31 +184,7 @@ function checkAnswer() {
 
 // Function to open a new window with the prefixes table
 function seePrefixes() {
-    const tableHTML = `
-        <html>
-            <head>
-                <title>Metric Prefixes</title>
-                <style>
-                    table { width: 400px; border-collapse: collapse; }
-                    th, td { padding: 5px; text-align: center; border: 1px solid black; }
-                    th { background-color: #f2f2f2; }
-                </style>
-            </head>
-            <body>
-                <h2>Metric Prefixes</h2>
-                <table>
-                    <tr><th>Prefix</th><th>Exponent</th></tr>
-                    ${Array.from(prefixes.entries()).map(([prefix, power]) => `
-                        <tr><td>${prefix}</td><td>${power}</tr>
-                    `).join('')}
-                </table>
-            </body>
-        </html>
-    `;
-
-    const newWindow = window.open('', '', 'width=500,height=1600,resizable=yes,scrollbars=yes');
-    newWindow.document.write(tableHTML);
-    newWindow.document.close();
+    const newWindow = window.open('prefixes.html', '', 'width=500,height=1600,resizable=yes,scrollbars=yes');
 }
 
 function showHint() {

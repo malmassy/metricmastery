@@ -29,7 +29,30 @@ td {
     border: 1px solid black;
     text-align: left;
 }
-.problem {
+.table-break {
+    margin: auto;
+    border-collapse: collapse;
+    width: 80%;
+    max-width: 800px;
+    background-color: white;
+    justify-content: left;
+    border-bottom: 3px;
+}
+.prefix-table { 
+    margin: auto;
+    border-collapse: collapse;
+    width: 80%;
+    max-width: 800px;
+    background-color: white;
+    justify-content: left;
+    border-left: 2px;
+    border-right: 2px;
+}
+#answer {
+    font-size: 2em;
+    margin: 20px;
+}
+#problem {
     font-size: 1.5em;
     margin: 20px;
 }
