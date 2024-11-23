@@ -94,9 +94,10 @@ function generateProblem() {
     generatePreSanity();
 }
 
+
 function generatePreSanity() {
-        document.getElementById("presanity").innerHTML = `<p style="font-size: 16px; font-weight: bold;">Do you expect the exponent of your answer to be bigger or smaller than the exponent of the question?</p>
-        <p style="font-size: 14px;">
+        document.getElementById("presanity").innerHTML = `
+            <div>
             The exponent for the "Input unit prefix" <b>(${i})</b>
             is
             <select id="unitComparison">
@@ -127,7 +128,7 @@ function generatePreSanity() {
                 <option value="smaller">smaller</option>
             </select>
             than the exponent of the question <b>(${quesN})</b>.
-        </p>`
+        </div>`
 }
 
 function reset() {
@@ -140,7 +141,6 @@ function reset() {
     document.getElementById("ansUnit").style.backgroundColor = "";
     document.getElementById("ansUnitExp").style.backgroundColor = "";
     document.getElementById("feedback").innerHTML = "";
-    document.getElementById("sanity").innerHTML = "";
     document.getElementById("scratch-work").value = "";
 }
 

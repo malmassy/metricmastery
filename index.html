@@ -10,9 +10,10 @@
     <div class="problem" id="problem">
         Click "Generate" to get a new problem!
     </div>
-    <button class="button" onclick="generateProblem()">New Problem</button>
+    <button class="button" onclick="generateProblem()">New Problem</button>  <button class="button" onclick="seePrefixes()">Prefix Table</button></br></br>
 
-    <div id="presanity"></div>
+    <button type="button" class="collapsible">Do you expect the exponent of your answer to be bigger or smaller than the exponent of the question?</button>
+    <div class="content" id="presanity"></div>
 
     <div class="input-container">
         <label for="ansM"><b>Your Answer:</b></label><br>
@@ -22,23 +23,34 @@
         <input type="text" id="ansUnitExp" class="input-box" placeholder="Unit Exponent" oninput="updateAnswer()"></sup>
     </div>
     <div id="answer"></div>
-    <div class="input-container">
-        <label for="scratch-work">Do your scratch work here:</label><br>
-        <input type="text" id="scratch-work" class="input-box" placeholder="(&quot;Input&quot; - &quot;Output&quot;) * &quot;Unit Exponent&quot; + &quot;Question Exponent&quot; = Exponent" style="width: 40em;" autocorrect="off" autocapitalize="none">
-    </div>
-
     </br>
 
 
 
-    <button class="button" onclick="checkAnswer()">Check Answer</button>
+    <button class="button" onclick="checkAnswer()">Check Answer</button> <button class="button-hint" id="button-hint" onclick="showHint()">Show Hints</button></body></br></br>
     <div id="feedback" class="feedback"></div>
-    <div id="sanity"></div>
-    </br>
-    <button class="button" onclick="seePrefixes()">Prefix Table</button></br></br>
-
-    <button class="button-hint" id="button-hint" onclick="showHint()">Show Hints</button></body></br></br>
     <div id="hint"></div>
+        <div class="input-container">
+        <label for="scratch-work">Do your scratch work here:</label><br>
+        <textarea rows="5" cols="40" type="text" id="scratch-work" class="input-box" placeholder="(&quot;Input&quot; - &quot;Output&quot;) * &quot;Unit Exponent&quot; + &quot;Question Exponent&quot; = Exponent" style="width: 40em;" autocorrect="off" autocapitalize="none">
+        </textarea>
+    </div>
     <script src="main.js"></script>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var j;
+
+        for (j = 0; j < coll.length; j++) {
+          coll[j].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+</script>
 </body>
 </html>
