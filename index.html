@@ -35,22 +35,22 @@
         <textarea rows="5" cols="40" type="text" id="scratch-work" class="input-box" placeholder="(&quot;Input&quot; - &quot;Output&quot;) * &quot;Unit Exponent&quot; + &quot;Question Exponent&quot; = Exponent" style="width: 40em;" autocorrect="off" autocapitalize="none">
         </textarea>
     </div>
-    <script src="main.js"></script>
     <script>
-        var coll = document.getElementsByClassName("collapsible");
-        var j;
+    var coll = document.getElementsByClassName("collapsible");
+    var j;
 
-        for (j = 0; j < coll.length; j++) {
-          coll[j].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.display === "block") {
-              content.style.display = "none";
-            } else {
-              content.style.display = "block";
-            }
-          });
+    for (j = 0; j < coll.length; j++) {
+      coll[j].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
         }
-</script>
+      });
+    }
+    </script>
+    <script src="main.js"></script>
 </body>
 </html>
