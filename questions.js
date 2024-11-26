@@ -90,7 +90,7 @@ let currentQuestion;
 // Load a random question
 function loadQuestion(index) {
     currentIndex = index;
-    const currentQuestion = questions[currentIndex];
+    currentQuestion = questions[currentIndex];
     document.getElementById('question-text').innerHTML = currentQuestion.question;
     document.getElementById('hint-content').innerHTML = currentQuestion.hint;
     document.getElementById('explanation-content').style.display = 'none';
