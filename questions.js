@@ -72,7 +72,7 @@ const questions =
 					For their documentation and legal filings, the volume needs to be reported in cubic centimeters (cm³). 
 					What is the volume of the storage tank in cubic centimeters?`
 	,
-	answer: '1,230 cm^3',
+	answer: '1230 cm^3',
 	hint: 'The exponent for cm is -2. Don\'t forget the formula "(I-O)*U + Q".',
 	explanation: `&bull;Re-write the question in our standard form: "Convert 1.23 * 10<sup>-3</sup> m<sup>3</sup> to cm<sup>3</sup>".</br>
 			&bull;Pull the exponent for the metric prefix units (Input &rarr; "base" &rarr; 0; Output &rarr; "c" &rarr; -2).</br>
