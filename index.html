@@ -3,56 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metric Conversion Practice</title>
-<link rel="stylesheet" href="main.css"></head>
-<body>
-    <h1>Metric Conversion Practice</h1>
-    <div class="problem" id="problem">
-        Click "Generate" to get a new problem!
-    </div>
-    <button class="button" onclick="generateProblem()">New Problem</button>  <button class="button" onclick="seePrefixes()">Prefix Table</button></br></br>
-
-    <button type="button" class="collapsible">Do you expect the exponent of your answer to be bigger or smaller than the exponent of the question?</button>
-    <div class="content" id="presanity"></div>
-
-    <div class="input-container">
-        <label for="ansM"><b>Your Answer:</b></label><br>
-        <input type="text" id="ansM" class="input-box" placeholder="Number" oninput="updateAnswer()"> × 10<sup>
-        <input type="text" id="ansN" class="input-box" placeholder="Exponent" oninput="updateAnswer()"></sup>
-        <input type="text" id="ansUnit" class="input-box" placeholder="Unit" oninput="updateAnswer()"> <sup>
-        <input type="text" id="ansUnitExp" class="input-box" placeholder="Unit Exponent" oninput="updateAnswer()"></sup>
-    </div>
-    <div id="answer"></div>
-    </br>
-
-
-
-    <button class="button" onclick="checkAnswer()">Check Answer</button> <button class="button-hint" id="button-hint" onclick="showHint()">Show Hints</button></body></br></br>
-    <div id="feedback" class="feedback"></div>
-    <div id="hint"></div>
-        <div class="input-container">
-        <label for="scratch-work">Do your scratch work here:</label><br>
-        <textarea rows="5" cols="40" type="text" id="scratch-work" class="input-box" placeholder="(&quot;Input&quot; - &quot;Output&quot;) * &quot;Unit Exponent&quot; + &quot;Question Exponent&quot; = Exponent" style="width: 40em;" autocorrect="off" autocapitalize="none">
-        </textarea>
-    </div>
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var coll = document.getElementsByClassName("collapsible");
-        var j;
-
-        for (j = 0; j < coll.length; j++) {
-          coll[j].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.display === "block") {
-              content.style.display = "none";
-            } else {
-              content.style.display = "block";
-            }
-          });
+    <title>Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
         }
-    });
-    </script>
-    <script src="main.js"></script>
+        h1 {
+            color: #333;
+            margin-top: 50px;
+        }
+        .link-container {
+            margin-top: 30px;
+        }
+        .link {
+            font-size: 18px;
+            color: #007BFF;
+            text-decoration: none;
+            margin: 10px 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .link:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the Homepage</h1>
+    
+    <div class="link-container">
+        <a href="./conversions.html" class="link">Conversions</a>
+        <a href="./questions.html" class="link">Questions</a>
+    </div>
+
 </body>
 </html>
