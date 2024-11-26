@@ -124,7 +124,7 @@ function loadRandomQuestion() {
 
 // Check the student's answer
 function checkAnswer() {
-    const studentAnswer = document.getElementById('student-answer').value.trim().replace(/\s+/g, '');
+    const studentAnswer = document.getElementById('student-answer').value.trim().replace(/\s+/g, '').replace(',','');
     const explanationContent = document.getElementById('explanation-content');
     if (studentAnswer === currentQuestion.answer.replace(/\s+/g, '')) {
         explanationContent.style.display = 'block';
