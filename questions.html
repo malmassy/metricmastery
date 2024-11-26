@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Questions</title>
+    <link rel="stylesheet" href="questions.css"></head>
+</head>
+<body>
+    <div class="container">
+        <h1>Practice Questions</h1>
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="loadLastQuestion()">Last</button>
+            <button class="nav-button" onclick="loadNextQuestion()">Next</button>
+            <button class="nav-button" onclick="loadRandomQuestion()">Random</button>
+        </div>
+        <div class="question">
+            <div id="question-text"></div>
+        </div>
+        <div class="answer-box">
+            <label for="student-answer">Your Answer:</label>
+            <input type="text" id="student-answer" placeholder="Enter your answer">
+            <button class="button" onclick="checkAnswer()">Submit</button>
+        </div>
+        <div class="hint" onclick="toggleHint()">Show Hint</div>
+        <div class="hint-content" id="hint-content"></div>
+        <div class="explanation" id="explanation-content" style="display: none;"></div>
+        <!-- Scratch Work Box -->
+        <div class="scratch-work-box">
+            <h3>Scratch Work:</h3>
+            <textarea id="scratch-work" placeholder="Write your intermediate steps here..."></textarea>
+        </div>
+    </div>
+    <script src="questions.js"></script>
+</body>
+</html>

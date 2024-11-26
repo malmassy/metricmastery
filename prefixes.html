@@ -1,33 +1,17 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Metric Prefixes</title>
     <link rel="stylesheet" href="main.css"></head>
+    <script type="module">
+        import { generateTable } from './prefixes.js';
+        
+        window.addEventListener('load', () => {
+            generateTable();
+        });
+    </script>
 </head>
 <body>
-    <table class="prefix-table">
-        <tr><th>Prefix</th><th>Exponent</th><th>Hint</th></tr>
-        <tr><td>Y</td><td>24</td><td>Your</td></tr>
-        <tr><td>Z</td><td>21</td><td>Zebra</td></tr>
-        <tr><td>E</td><td>18</td><td>Eats</td></tr>
-        <tr><td>P</td><td>15</td><td>Party</td></tr>
-        <tr class="table-break"><td>T</td><td>12</td><td>Treats.</td></tr>
-        <tr><td>G</td><td>9</td><td>Greg's</td></tr>
-        <tr><td>M</td><td>6</td><td>Moose</td></tr>
-        <tr><td>k</td><td>3</td><td>killed</td></tr>
-        <tr><td>h</td><td>2</td><td>his</td></tr>
-        <tr class="table-break"><td>da</td><td>1</td><td>dad.</td></tr>
-        <tr><td>--</td><td>0</td><td></td></tr>
-        <tr><td>d</td><td>-1</td><td>did</td></tr>
-        <tr><td>c</td><td>-2</td><td>canada's</td></tr>
-        <tr><td>m</td><td>-3</td><td>military</td></tr>
-        <tr><td>&mu;</td><td>-6</td><td>migrate</td></tr>
-        <tr class="table-break"><td>n</td><td>-9</td><td>north?</td></tr>
-        <tr><td>p</td><td>-12</td><td>probably</td></tr>
-        <tr><td>f</td><td>-15</td><td>for</td></tr>
-        <tr><td>a</td><td>-18</td><td>a</td></tr>
-        <tr><td>z</td><td>-21</td><td>zillion</td></tr>
-        <tr class="table-break"><td>y</td><td>-24</td><td>years.</td></tr>
-
-    </table>
+    <div id='prefix-table'></div>
 </body>
 </html>
