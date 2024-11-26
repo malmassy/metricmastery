@@ -56,7 +56,7 @@ const questions =
 					In order to purchase materials and plan the layout, they need to know the area of the land in square meters (m<sup>2</sup>). 
 					What is the area of the park in square meters?`
 	,
-	answer: '31,400 m^2',
+	answer: '31400 m^2',
 	hint: 'The exponent for km is 3. Don\'t forget the formula "(I-O)*U + Q".',
 	explanation: `&bull;Re-write the question in our standard form: "Convert 3.14 * 10<sup>-2</sup> km<sup>2</sup> to m<sup>2</sup>".</br>
 			&bull;Pull the exponent for the metric prefix units (Input &rarr; "k" &rarr; 3; Output &rarr; "base" &rarr; 0).</br>
