@@ -101,7 +101,7 @@ const questions =
 	type: 'estimation', 
 	question: `What is the diameter of a penny (in mm)?`
 	,
-	image: 'penny.jpg',
+	image: 'penny.JPG',
 	answer_value: 19,
 	answer_units: 'mm',
 	hint: '1 inch is 25mm',
@@ -111,7 +111,7 @@ const questions =
 	type: 'estimation', 
 	question: `How thick is a penny (in mm)?`
 	,
-	image: 'penny_thickness.jpg',
+	image: 'penny_thickness.JPG',
 	answer_value: 1.52,
 	answer_units: 'mm',
 	hint: '1 inch is 25mm',
@@ -121,7 +121,7 @@ const questions =
 	type: 'estimation', 
 	question: `What is the area of one side of a penny (in mm<sup>2</sup>)?`
 	,
-	image: 'penny.jpg',
+	image: 'penny.JPG',
 	answer_value: 286,
 	answer_units: 'mm^2',
 	hint: 'The formula for area of a circle is &#x3C0;r<sup>2</sup>.',
