@@ -91,7 +91,7 @@ const questions =
 	type: 'estimation', 
 	question: `How long is a standard BIC mechanical pencil (in cm)?`
 	,
-	image: 'mechanical_pencil.jpg',
+	image: 'mechanical_pencil.JPG',
 	answer_value: 15,
 	answer_units: 'cm',
 	hint: '1 foot is 30.5cm',
