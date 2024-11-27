@@ -1,5 +1,5 @@
 window.onload = function() {
-    loadQuestion(0);
+    loadRandomQuestion();
 }
 
 const questions = 
