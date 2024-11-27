@@ -33,6 +33,15 @@ cursor: pointer;
 color: #007BFF;
 }
 
+#question-image {
+    max-width: 100%;
+    max-height: 250px;
+    height: auto;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 .hint-content {
 display: none;
 margin-top: 5px;
