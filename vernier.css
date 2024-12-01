@@ -1,0 +1,118 @@
+:root {
+  --ruler-height: 50;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}
+
+h1 {
+  color: #4CAF50;
+}
+
+.scale-wrapper {
+  position: relative;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-sizing: border-box;
+  height: calc(var(--ruler-height) * 5px);;
+}
+
+.scale-container {
+  position: relative;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: flex-end; /* For the upper scale */
+}
+
+#scale-upper {
+  height: calc(var(--ruler-height) * 2px);
+  width: 1000px;
+}
+
+#scale-lower {
+  position: absolute;
+  width: 990px; /* Lower scale is narrower */
+  height: calc(var(--ruler-height) * 1px);
+  align-items: flex-start; /* Flip markings to the top */
+}
+
+.marking {
+  position: absolute;
+  background: black;
+  width: 1px;
+}
+
+.marking.long {
+  height: 30px;
+}
+
+.marking.medium {
+  height: 20px;
+}
+
+.marking.short {
+  height: 10px;
+}
+
+.label {
+  position: absolute;
+  font-size: 12px;
+}
+
+.label-top {
+  bottom: 35px;
+}
+
+.label-bottom {
+  top: 25px;
+}
+
+.control-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.control-panel button {
+    font-size: 24px;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.control-panel button:hover {
+    background-color: #0056b3;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.inputs input {
+    width: 100px;
+    padding: 5px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.inputs input:focus {
+    outline: none;
+    border-color: #007BFF;
+    background-color: #fff;
+}
