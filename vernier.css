@@ -71,6 +71,17 @@ h1 {
   top: 25px;
 }
 
+.label-bottom-zero {
+  color: red;
+  font-weight: bold;
+}
+
+.marking-bottom-zero {
+  background: red;
+  font-weight: bold;
+
+}
+
 .control-panel {
     display: flex;
     align-items: center;

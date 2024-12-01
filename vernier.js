@@ -84,6 +84,11 @@ function createLowerScale(offset) {
             label.classList.add("label", "label-bottom");
             label.style.left = `${location - 3}px`;
             label.innerText = i / 5;
+            if (i === 0) {
+               marking.classList.add("marking-bottom-zero");
+               label.classList.add("label-bottom-zero");
+            }
+
             scaleContainer.appendChild(label);
         } else {
             marking.classList.add("short");
@@ -105,6 +110,7 @@ function updateMeasurement(delta) {
 
     let currentMM = parseFloat(mmInput.value);
     currentMM = Math.max(0, (currentMM + delta).toFixed(2)); // Prevent negative values
+    currentMM = Math.min(150, currentMM.toFixed(2));
 
     mmInput.value = currentMM.toFixed(2);
     cmInput.value = (currentMM / 10).toFixed(3);
@@ -113,10 +119,15 @@ function updateMeasurement(delta) {
 }
 
 function setMeasurement(unit, value) {
+
     if (unit === 'mm') {
+        value = Math.min(150,value);
+        value = Math.max(0, value);
         // Convert mm to cm and update cm input
         document.getElementById('cm-input').value = (value / 10).toFixed(3);
     } else if (unit === 'cm') {
+        value = Math.min(15,value);
+        value = Math.max(0, value);
         // Convert cm to mm and update mm input
         document.getElementById('mm-input').value = (value * 10).toFixed(2);
     }
