@@ -38,14 +38,9 @@ h2 {
   font-size: 4em;
   height: 80px;
   border-radius: .2em;
-  background-image: -webkit-repeating-linear-gradient(left, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0)   6%, hsla(0,0%,100%, .1) 7.5%),
-    -webkit-repeating-linear-gradient(left, hsla(0,0%,  0%,0) 0%, hsla(0,0%,  0%,0)   4%, hsla(0,0%,  0%,.03) 4.5%),
-    -webkit-repeating-linear-gradient(left, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0) 1.2%, hsla(0,0%,100%,.15) 2.2%),
-    
-    linear-gradient(180deg, hsl(0,0%,78%)  0%, 
-    hsl(0,0%,90%) 47%, 
-    hsl(0,0%,78%) 53%,
-    hsl(0,0%,70%)100%);
+  background-image:      linear-gradient(to right, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0.1)),
+    linear-gradient(to right, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.03)),
+    linear-gradient(180deg, hsl(0, 0%, 78%) 0%, hsl(0, 0%, 90%) 50%, hsl(0, 0%, 78%) 53%, hsl(0, 0%, 70%) 100%);
 }
 
 #scale-upper {
@@ -147,12 +142,19 @@ h2 {
     background-color: #fff;
 }
 .how-to-read {
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  overflow: hidden;
+  max-height: 0;
+  padding: 0;
   margin-top: 20px;
   text-align: left;
-  padding: 20px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
+}
+.how-to-read.expanded {
+    max-height: 1000px; /* Set to a large enough value to accommodate content */
+    padding: 1rem;
 }
 .how-to-read h2 {
   margin-top: 0;
@@ -175,4 +177,22 @@ li {
 .bold-red {
   color: red;
   font-weight: bold;  
+}
+.triangle {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 1.2rem; /* Adjust size as needed */
+    margin-right: 8px; /* Add space between the triangle and text */
+    transition: transform 0.3s ease; /* Smooth rotation */
+}
+
+/* Rotate the triangle when expanded */
+.triangle.expanded {
+    transform: rotate(90deg); /* Rotate to the right */
+}
+.step-by-step {
+  margin-top: 5px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }

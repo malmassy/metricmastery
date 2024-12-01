@@ -24,8 +24,23 @@
         <div class="scale-container brushed-metal" id="scale-upper"></div>
         <div class="scale-container brushed-metal" id="scale-lower"></div>
     </div>
+    <div class="step-by-step">
+        <h2>Here's a step-by-step guide to read it:</h2>
+        <ol>
+            <li>Locate the zero mark on the vernier scale (it's the red zero on the bottom scale above), look immediately up at the main scale and start moving left until you see the first mark on the main scale "at or to the left of" the zero mark on the vernier scale. 
+                <ol type="a"><li>In the example above, the vernier zero mark is at or immediately after the <span id="zero-mark-reading" class="bold-red">0.0cm</span> mark on the main scale. We now know our measurement is somewhere between <span id="zero-mark-reading-two">0.0cm</span> and <span id="zero-mark-plus-one">0.1cm</span>.</ol>
+            <li>Find the line on the vernier scale that aligns perfectly with any line on the main scale. Record this vernier scale reading.<ol type="a">
+                <li>Notice that the mark on the Vernier Scale at <span id="vernier-reading" class="bold-red">0.0</span> aligns perfectly with a line on the main scale above, so we will capture <span id="vernier-multiplied" class="bold-red">00</span> as our extra precision.
+            </ol>
+            <li>Add the two readings together to get the final measurement.
+                <ol><li><span id="zero-mark-reading-three" class="bold-red">0.0</span> plus <span id="vernier-multiplied-two" class="bold-red">0.0</span> = <span id="answer" class="bold-red">0.000cm</span>.
+                </ol>
+        </ol>
+    </div>
+    <h2>
+        <span id="toggle-icon" class="triangle">▶</span>Vernier Caliper Basics
+    </h2>
     <div class="how-to-read">
-        <h2>How to Read a Vernier Scale</h2>
         <p>The vernier scale is used for precise measurements.</p> 
         <p>Check out this <a href="https://en.wikipedia.org/wiki/Calipers#Vernier_caliper">Wikipedia entry</a>.</p>
         <a title="Joaquim Alves Gaspar, CC BY 2.5 &lt;https://creativecommons.org/licenses/by/2.5&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Using_the_caliper_new.gif"><img width="800" alt="Using the caliper new" src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Using_the_caliper_new.gif?20061123164823"></a>
@@ -42,19 +57,16 @@
                 <li>So the Vernier Scale divides each millimeter on the main scale into 50 sub-units, 1/50 = <b>0.02</b>.
                 </ol>
         </ol>
-        <p>Here's a step-by-step guide to read it:</p>
-        <ol>
-            <li>Locate the zero mark on the vernier scale (it's the red zero on the bottom scale above), look immediately up at the main scale and start moving left until you see the first mark on the main scale "at or to the left of" the zero mark on the vernier scale. 
-                <ol type="a"><li>In the example above, the vernier zero mark is at or immediately after the <span id="zero-mark-reading" class="bold-red">0.0cm</span> mark on the main scale. We now know our measurement is somewhere between <span id="zero-mark-reading-two">0.0cm</span> and <span id="zero-mark-plus-one">0.1cm</span>.</ol>
-            <li>Find the line on the vernier scale that aligns perfectly with any line on the main scale. Record this vernier scale reading.<ol type="a">
-                <li>Notice that the mark on the Vernier Scale at <span id="vernier-reading" class="bold-red">0.0</span> aligns perfectly with a line on the main scale above, so we will capture <span id="vernier-multiplied" class="bold-red">00</span> as our extra precision.
-            </ol>
-            <li>Add the two readings together to get the final measurement.
-                <ol><li><span id="zero-mark-reading-three" class="bold-red">0.0</span> plus <span id="vernier-multiplied-two" class="bold-red">0.0</span> = <span id="answer" class="bold-red">0.000cm</span>.
-                </ol>
-        </ol>
     </div>
+    <script>
+        const toggleIcon = document.getElementById('toggle-icon');
+        const howToReadDiv = document.querySelector('.how-to-read');
 
+        toggleIcon.addEventListener('click', () => {
+            howToReadDiv.classList.toggle('expanded');
+            toggleIcon.classList.toggle('expanded');
+        });
+    </script>
   <script src="vernier.js"></script>
 </body>
 </html>
