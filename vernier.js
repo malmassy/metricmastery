@@ -46,11 +46,13 @@ function createUpperScale() {
         if (i % 10 === 0) {
             marking.classList.add("long");
 
-            const label = document.createElement("div");
-            label.classList.add("label", "label-top");
-            label.style.left = `${location - 3}px`;
-            label.innerText = i / 10 + ' ' + units;
-            scaleContainer.appendChild(label);
+            if (i <= 150) {
+                const label = document.createElement("div");
+                label.classList.add("label", "label-top");
+                label.style.left = `${location - 3}px`;
+                label.innerText = i / 10 + ' ' + units;
+                scaleContainer.appendChild(label);
+            }
         } else if (i % 5 === 0) {
             marking.classList.add("medium");
         } else {
@@ -99,7 +101,6 @@ function createLowerScale(offset) {
 }
 
 function moveLowerScale(offset) {
-    console.log(offset);
     document.getElementById("scale-lower").style.marginLeft = `${offset}px`;
 }
 
@@ -114,6 +115,26 @@ function updateMeasurement(delta) {
 
     mmInput.value = currentMM.toFixed(2);
     cmInput.value = (currentMM / 10).toFixed(3);
+
+    const cmRounded = Math.floor(currentMM) / 10;
+    const cmTenths = (cmRounded).toFixed(1);
+    const cmTentsPlusOne = (cmRounded + 0.1).toFixed(1);
+
+    document.getElementById("zero-mark-reading").innerHTML = cmTenths + " cm";
+    document.getElementById("zero-mark-reading-two").innerHTML = cmTenths + " cm";
+    document.getElementById("zero-mark-plus-one").innerHTML = cmTentsPlusOne + " cm";
+
+    const vernierValue = ((currentMM % 1).toFixed(2) * 10).toFixed(1);
+    const vernierMultiplied = (vernierValue * 10).toString().padStart(2,'0');
+
+    document.getElementById("vernier-reading").innerHTML = vernierValue;   
+    document.getElementById("vernier-multiplied").innerHTML = vernierMultiplied; 
+    document.getElementById("vernier-multiplied-two").innerHTML = vernierMultiplied; 
+
+    document.getElementById("zero-mark-reading-three").innerHTML = cmTenths;
+
+    document.getElementById("answer").innerHTML = cmTenths + vernierMultiplied + "cm";
+
 
     moveLowerScale(mmInput.value / resolution);
 }
