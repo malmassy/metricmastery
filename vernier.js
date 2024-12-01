@@ -13,6 +13,10 @@ window.onload = function() {
     // Event listeners for arrows
     document.getElementById('decrement').addEventListener('click', () => updateMeasurement(-0.02));
     document.getElementById('increment').addEventListener('click', () => updateMeasurement(0.02));
+    document.getElementById('decrement-tenth').addEventListener('click', () => updateMeasurement(-0.1));
+    document.getElementById('increment-tenth').addEventListener('click', () => updateMeasurement(0.1));
+    document.getElementById('decrement-mm').addEventListener('click', () => updateMeasurement(-1));
+    document.getElementById('increment-mm').addEventListener('click', () => updateMeasurement(1));
     mmInput.addEventListener('change', (event) => {
         const value = parseFloat(event.target.value);
         if (!isNaN(value)) { setMeasurement('mm', value);}
