@@ -137,7 +137,7 @@ function updateMeasurement(delta) {
 
     document.getElementById("zero-mark-reading-three").innerHTML = cmTenths;
 
-    document.getElementById("answer").innerHTML = cmTenths + vernierMultiplied + "cm";
+    document.getElementById("vernier-answer").innerHTML = cmTenths + vernierMultiplied + "cm";
 
 
     moveLowerScale(mmInput.value / resolution);

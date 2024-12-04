@@ -9,13 +9,8 @@ body {
   text-align: left;
 }
 
-h1 {
-  color: #4CAF50;
-}
-
 h2 {
   text-align: left;
-  color: #4CAF50;
 }
 
 .scale-wrapper {
@@ -195,4 +190,5 @@ li {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
+  text-align: left;
 }

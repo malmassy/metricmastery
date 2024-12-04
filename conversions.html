@@ -6,6 +6,13 @@
     <title>Metric Conversion Practice</title>
 <link rel="stylesheet" href="main.css"></head>
 <body>
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header-container').innerHTML = data)
+            .catch(error => console.error('Error loading header:', error));
+    </script>
     <h1>Metric Conversion Practice</h1>
     <div class="problem" id="problem">
         Click "Generate" to get a new problem!

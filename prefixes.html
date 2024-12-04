@@ -12,6 +12,13 @@
     </script>
 </head>
 <body>
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header-container').innerHTML = data)
+            .catch(error => console.error('Error loading header:', error));
+    </script>
     <div id='prefix-table'></div>
 </body>
 </html>

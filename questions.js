@@ -95,7 +95,7 @@ const questions =
 	answer_value: 15,
 	answer_units: 'cm',
 	hint: '1 foot is 30.5cm',
-	'explanation': `A standard BIC mechanical pencil is about 15cm long.`
+	explanation: `A standard BIC mechanical pencil is about 15cm long.`
 	},
 	{
 	type: 'estimation', 
@@ -105,7 +105,7 @@ const questions =
 	answer_value: 19,
 	answer_units: 'mm',
 	hint: '1 inch is 25mm',
-	'explanation': `A penny is 19mm in diameter.`
+	explanation: `A penny is 19mm in diameter.`
 	},
 	{
 	type: 'estimation', 
@@ -115,7 +115,7 @@ const questions =
 	answer_value: 1.52,
 	answer_units: 'mm',
 	hint: '1 inch is 25mm',
-	'explanation': `A penny is 1.52mm thick.`
+	explanation: `A penny is 1.52mm thick.`
 	},
 	{
 	type: 'estimation', 
@@ -125,7 +125,26 @@ const questions =
 	answer_value: 286,
 	answer_units: 'mm^2',
 	hint: 'The formula for area of a circle is &#x3C0;r<sup>2</sup>.',
-	'explanation': `The diameter of a penny is 19mm, so the radius of a penny is 9.5mm. 9.5<sup>2</sup> &#8776; 90, 90 * 3.14 &#8776; 283`
+	explanation: `The diameter of a penny is 19mm, so the radius of a penny is 9.5mm. 9.5<sup>2</sup> &#8776; 90, 90 * 3.14 &#8776; 283`
+	},
+	{
+	type: 'estimation',
+	question: 'What is the surface area of the cylinder in square centimeters?',
+	image: 'cylinder.JPG',
+	answer_value: 44.59,
+	answer_units: 'cm^2',
+	hint: 'A = 2rπh + 2πr<sup>2</sup>',
+	explanation: `
+		Recall the formula for the surface area of a cylinder:
+		<br>Surface Area = 2πr² (area of the two circles) + 2πrh (area of the rectangular body,
+		which has a height "h" and a width equal to the circumference of the circle (2πr)). 
+		Diameter of the cylinder: 1.418 cm (so the radius is 0.709 cm). Height of the cylinder: 9.3 cm. 
+		Area of one circle = π × (0.709)² ≈ 1.579 cm². For two circles: 2 × 1.579 ≈ 3.158 cm².
+		For two circles: 2 × 1.579 ≈ 3.158 cm². Calculate the surface area of the body:
+        <br>Rectangle area = circumference × height = π × diameter × height = π × 1.418 × 9.3 ≈ 41.429 cm².
+        Add the areas:
+        <br>Total Surface Area ≈ 3.158 + 41.429 ≈ 44.59 cm².
+		`
 	}
 ]
 

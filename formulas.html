@@ -8,41 +8,16 @@
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
-    <style>
-        body {
-            font-family: 'Libre Baskerville', Georgia, serif;
-            margin: 20px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        .formula {
-            display: none;
-            font-style: italic;
-        }
-        button {
-            padding: 10px 20px;
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .controls {
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header-container').innerHTML = data)
+            .catch(error => console.error('Error loading header:', error));
+    </script>
     <h1>Geometric Formulas</h1>
 
     <div class="controls">
@@ -62,71 +37,72 @@
             <tr>
                 <td>Sphere</td>
                 <td>
+                    <button class="toggle-btn" onclick="toggleFormula('volume-sphere')" aria-label="Toggle formula">Show/Hide</button>
                     <span class="formula" id="volume-sphere">\( V = \frac{4}{3} \pi r^3 \)</span>
-                    <button onclick="toggleFormula('volume-sphere')">Show/Hide</button>
                 </td>
                 <td>
+                    <button class="toggle-btn" onclick="toggleFormula('area-sphere')" aria-label="Toggle formula">Show/Hide</button>
                     <span class="formula" id="area-sphere">\( A = 4 \pi r^2 \)</span>
-                    <button onclick="toggleFormula('area-sphere')">Show/Hide</button>
                 </td>
             </tr>
             <tr>
                 <td>Cylinder</td>
                 <td>
+                    <button class="toggle-btn" onclick="toggleFormula('volume-cylinder')" aria-label="Toggle formula">Show/Hide</button>
                     <span class="formula" id="volume-cylinder">\( V = \pi r^2 h \)</span>
-                    <button onclick="toggleFormula('volume-cylinder')">Show/Hide</button>
                 </td>
                 <td>
+                    <button class="toggle-btn" onclick="toggleFormula('area-cylinder')" aria-label="Toggle formula">Show/Hide</button>
                     <span class="formula" id="area-cylinder">\( A = 2 \pi r h + 2 \pi r^2 \)</span>
-                    <button onclick="toggleFormula('area-cylinder')">Show/Hide</button>
                 </td>
             </tr>
             <tr>
                 <td>Cone</td>
                 <td>
+                    <button class="toggle-btn" onclick="toggleFormula('volume-cone')" aria-label="Toggle formula">Show/Hide</button>
                     <span class="formula" id="volume-cone">\( V = \frac{1}{3} \pi r^2 h \)</span>
-                    <button onclick="toggleFormula('volume-cone')">Show/Hide</button>
                 </td>
                 <td>
+                    <button class="toggle-btn" onclick="toggleFormula('area-cone')" aria-label="Toggle formula">Show/Hide</button>
                     <span class="formula" id="area-cone">\( A = \pi r (r + l) \)</span>
-                    <button onclick="toggleFormula('area-cone')">Show/Hide</button>
                 </td>
             </tr>
             <tr>
                 <td>Cube</td>
                 <td>
+                    <button class="toggle-btn" onclick="toggleFormula('volume-cube')" aria-label="Toggle formula">Show/Hide</button>
                     <span class="formula" id="volume-cube">\( V = a^3 \)</span>
-                    <button onclick="toggleFormula('volume-cube')">Show/Hide</button>
                 </td>
                 <td>
+                    <button class="toggle-btn" onclick="toggleFormula('area-cube')" aria-label="Toggle formula">Show/Hide</button>
                     <span class="formula" id="area-cube">\( A = 6a^2 \)</span>
-                    <button onclick="toggleFormula('area-cube')">Show/Hide</button>
                 </td>
             </tr>
             <tr>
                 <td>Rectangular Prism</td>
                 <td>
+                    <button class="toggle-btn" onclick="toggleFormula('volume-rectangular-prism')" aria-label="Toggle formula">Show/Hide</button>
                     <span class="formula" id="volume-rectangular-prism">\( V = l \cdot w \cdot h \)</span>
-                    <button onclick="toggleFormula('volume-rectangular-prism')">Show/Hide</button>
                 </td>
                 <td>
+                    <button class="toggle-btn" onclick="toggleFormula('area-rectangular-prism')" aria-label="Toggle formula">Show/Hide</button>
                     <span class="formula" id="area-rectangular-prism">\( A = 2(lw + lh + wh) \)</span>
-                    <button onclick="toggleFormula('area-rectangular-prism')">Show/Hide</button>
                 </td>
             </tr>
         </tbody>
     </table>
-
+    <footer>
+    </footer>
     <script>
         function toggleFormula(id) {
             const element = document.getElementById(id);
-            element.style.display = element.style.display === 'none' ? 'inline' : 'none';
+            element.classList.toggle('show');
         }
 
         function toggleAll(action) {
             const formulas = document.querySelectorAll('.formula');
             formulas.forEach(formula => {
-                formula.style.display = action === 'show' ? 'inline' : 'none';
+                formula.classList[action === 'show' ? 'add' : 'remove']('show');
             });
         }
     </script>

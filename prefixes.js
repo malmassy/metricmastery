@@ -27,7 +27,7 @@ const metricPrefixes = {
 }
 
 export function generateTable() {
-    let table = '<table border="1" style="border-collapse: collapse; width: 100%;">';
+    let table = '<table>';
     table += '<thead><tr><th>Symbol</th><th>Exponent</th><th>Prefix</th><th style="text-align: left;">Hint</th></tr></thead><tbody>';
 
     for (const [prefix, details] of Object.entries(metricPrefixes)) {

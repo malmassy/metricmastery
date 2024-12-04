@@ -169,7 +169,6 @@ function checkAnswer() {
     const ansUnitExp = uExpText;
 
     let feedback = document.getElementById("feedback");
-    let sanity = document.getElementById("sanity");
     let correct = true;
 
     document.getElementById("ansM").style.backgroundColor = "";
@@ -216,9 +215,6 @@ function checkAnswer() {
     if (correct) {
         feedback.innerHTML = "Correct! Well done!";
         feedback.className = "feedback correct";
-        sanity.innerHTML = `<div class="sanity">It makes sense that your answer exponent (${ansNSubmit}) is ${ansCompareText} than the question
-        exponent (${quesN}) because the output units (${o}, ${oPrefixVal}) are ${unitsCompareText} than the input units (${i}, ${iPrefixVal}).
-        </div>`
     } else {
         feedback.innerHTML = "Incorrect. Try again!";
         feedback.className = "feedback incorrect";
