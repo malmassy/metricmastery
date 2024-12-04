@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surface Area of a Cylinder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .images-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .images-container img {
+            width: 400px;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .steps {
+            text-align: left;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="images-container">
+            <img src="./images/cylinder_height.JPG" alt="Cylinder Height">
+            <img src="./images/dial_caliper.JPG" alt="Dial Caliper">
+        </div>
+        <h2>What is the Surface Area in Square Centimeters?</h2>
+        <div class="steps">
+            <h3>Steps to Solve:</h3>
+            <ol>
+                <li>
+                    Recall the formula for the surface area of a cylinder:
+                    <br>Surface Area = 2πr² (area of the two circles) + 2πrh (area of the rectangular body, which has a height "h" and a width equal to the circumference of the circle (2πr)).
+                </li>
+                <li>
+                    Observe the dimensions:
+                    <ul>
+                        <li>Diameter of the cylinder: 1.418 cm (so the radius is 0.709 cm).</li>
+                        <li>Height of the cylinder: 9.3 cm.</li>
+                    </ul>
+                </li>
+                <li>
+                    Calculate the surface area of the circles:
+                    <br>Area of one circle = π × (0.709)² ≈ 1.579 cm².
+                    <br>For two circles: 2 × 1.579 ≈ 3.158 cm².
+                </li>
+                <li>
+                    Calculate the surface area of the body:
+                    <br>Rectangle area = circumference × height = π × diameter × height = π × 1.418 × 9.3 ≈ 41.429 cm².
+                </li>
+                <li>
+                    Add the areas:
+                    <br>Total Surface Area ≈ 3.158 + 41.429 ≈ 44.59 cm².
+                </li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
