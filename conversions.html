@@ -22,12 +22,27 @@
     <button type="button" class="collapsible">Do you expect the exponent of your answer to be bigger or smaller than the exponent of the question?</button>
     <div class="content" id="presanity"></div>
 
+    <label for="ansM"><b>Your Answer:</b></label><br>
     <div class="input-container">
-        <label for="ansM"><b>Your Answer:</b></label><br>
-        <input type="number" id="ansM" class="input-box" placeholder="Number" oninput="updateAnswer()"> × 10<sup>
-        <input type="number" id="ansN" class="input-box" placeholder="Exponent" oninput="updateAnswer()"></sup>
-        <input type="text" id="ansUnit" class="input-box" placeholder="Unit" oninput="updateAnswer()"> <sup>
-        <input type="number" id="ansUnitExp" class="input-box" placeholder="Unit Exponent" oninput="updateAnswer()"></sup>
+        <span class="input-group">
+            <input type="number" id="ansM" class="input-box" placeholder="Number" oninput="updateAnswer()">
+            <span id="hint-ansM" class="hint" onmouseover="showNumberHint()" onmouseleave="clearNumberHint()" >Hint</span>
+        </span> 
+        <span style="text-align: center; font-size: 2em; padding: 5px;">× 10</span>
+        <span class="input-group">
+            <sup><input type="number" id="ansN" class="input-box" placeholder="Exponent" oninput="updateAnswer()" style="height: 5px;"></sup>
+            <span id="hint-ansN" class="hint" onmouseover="showShortExpHint()" onmouseleave="clearShortExpHint()">Hint</span>
+        </span>
+        <span class="input-group">
+            <input type="text" id="ansUnit" class="input-box" placeholder="Unit" oninput="updateAnswer()">
+            <span id="hint-ansUnit" class="hint" onmouseover="showUnitHint()" onmouseleave="clearUnitHint()">Hint</span>
+        </span> 
+        <span class="input-group">
+            <sup>
+            <input type="number" id="ansUnitExp" class="input-box" placeholder="Unit Exponent" oninput="updateAnswer()" style="height: 5px;">
+            </sup>
+            <span id="hint-ansUnitExp" class="hint" onmouseover="showUnitExpHint()" onmouseleave="clearUnitExpHint1()">Hint</span>
+        </span>
     </div>
     <div id="answer"></div>
     </br>
@@ -60,6 +75,6 @@
         }
     });
     </script>
-    <script src="main.js"></script>
+    <script src="conversions.js"></script>
 </body>
 </html>

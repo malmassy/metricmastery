@@ -300,8 +300,14 @@ function showUnitExpHint() {
 function clearUnitExpHint() {
     document.getElementById("uExpText1").style.backgroundColor = "";
     document.getElementById("uExpText2").style.backgroundColor = "";
+    document.getElementById("ansUnitExp").style.backgroundColor = "";
     document.getElementById("noUnitExp").style.backgroundColor = "";
-    document.getElementById("ansUnitExp").style.backgroundColor = "";    
+}
+
+function clearUnitExpHint1() {
+    document.getElementById("uExpText1").style.backgroundColor = "";
+    document.getElementById("uExpText2").style.backgroundColor = "";
+    document.getElementById("ansUnitExp").style.backgroundColor = "";
 }
 
 function showExpHint() {
@@ -312,4 +318,16 @@ function showExpHint() {
 function clearExpHint() {
     document.getElementById("expHint").style.backgroundColor = "";
     document.getElementById("ansN").style.backgroundColor = "";    
+}
+
+
+function showShortExpHint() {
+    document.getElementById("ansN").style.backgroundColor = "aqua";
+    document.getElementById("hint-ansN").innerHTML = `(${iPrefixVal} - ${oPrefixVal}) * ${uExpVal} + ${quesN} = ${ansN}`;
+}
+
+function clearShortExpHint() {
+    document.getElementById("ansN").style.backgroundColor = ""; 
+    document.getElementById("hint-ansN").innerHTML = "Hint";
+
 }
