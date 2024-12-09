@@ -1,16 +1,18 @@
 window.onload = function() {
     generateProblem();
 }
-// Map object for metric prefixes and their corresponding powers of 10
-const prefixes = new Map([
-    ["Y", 24], ["Z", 21], ["E", 18], ["P", 15], ["T", 12],
-    ["G", 9], ["M", 6], ["k", 3], ["h", 2], ["da", 1], ["", 0],
-    ["d", -1], ["c", -2], ["m", -3], ["&mu;", -6], ["n", -9], 
-    ["p", -12], ["f", -15], ["a", -18], ["z", -21], ["y", -24]
-]);
-const prefixesArray = Array.from(prefixes.keys());
 
-const units = ['m','g','L','s'];
+const prefixesMap = Object.values(metricPrefixes).map(obj => obj.symbol);
+
+const units = {
+    meters: {symbol: 'm'},
+    grams: {symbol: 'g'}, 
+    liters: {symbol: 'L'},
+    seconds: {symbol: 's'}
+};
+
+const unitsMap = Object.values(units).map(obj => obj.symbol);
+
 
 // Allow for basic units, units-squared or units-cubed.
 const unitExps = new Map([
@@ -57,78 +59,51 @@ function getUnitType() {
 
 // Function to generate a new problem
 function generateProblem() {
+
+    inputPrefix = getRandomElement(Object.keys(metricPrefixes));
+    outputPrefix = getRandomElement(Object.keys(metricPrefixes));
+
+    while (outputPrefix == inputPrefix) {
+        outputPrefix = getRandomElement(Object.keys(metricPrefixes));
+    }
+
+    wordOrSymbol = getRandomElement(['word','symbol']);
+
     reset();
     quesM = getRandomNumber(1, 10, 2); // Random number with 2 decimals
     quesN = getRandomInteger(-10, 10); // Random integer between -10 and 10
-    u = getRandomElement(units);
-    i = getRandomElement(prefixesArray); // Random prefix for "a"
-    o = getRandomElement(prefixesArray); // Random prefix for "b"
+    u = getRandomElement(unitsMap);
+
+    i = metricPrefixes[inputPrefix]['symbol']; // Random prefix for "a"
+
+    o = metricPrefixes[outputPrefix]['symbol']; // Random prefix for "b"
     uExpText = getRandomElement(unitExpsArray);
 
     uExpVal = unitExps.get(uExpText);
-    iPrefixVal = prefixes.get(i);
-    oPrefixVal = prefixes.get(o);
+    iPrefixVal = metricPrefixes[inputPrefix]['exponent'];
+    oPrefixVal = metricPrefixes[outputPrefix]['exponent']
 
     ansN = quesN + uExpVal * (iPrefixVal - oPrefixVal);
 
     // Ensure prefixes are different
     // Don't let the output be "micro" so they don't have to type "mu"...
-    if (i === o || o === "&mu;" || Math.abs(ansN) > 41) {
+    if (o === "&mu;" || Math.abs(ansN) > 41) {
         return generateProblem();
     }
 
     // Display the problem
     const problemElement = document.getElementById("problem");
-    problemElement.innerHTML = `
+    problemElement.innerHTML = `Convert 
         <span id="quesM">${quesM}</span>
          × 10<span id="quesN"><sup>${quesN}</sup></span> 
         <span id="i">${i}</span>${u}<span id="uExpText1"><sup>${uExpText}</sup></span>
-        to <span id="o">${o}${u}</span><span id="uExpText2"><sup>${uExpText}</sup></span>`;
+        to <span id="o">${o}${u}</span><span id="uExpText2"><sup>${uExpText}</sup></span>.`;
 
     // Clear previous inputs and feedback
     document.getElementById("ansM").value = "";
     document.getElementById("ansN").value = "";
     document.getElementById("ansUnit").value = "";
     document.getElementById("ansUnitExp").value = "";
-
-    generatePreSanity();
-}
-
-
-function generatePreSanity() {
-        document.getElementById("presanity").innerHTML = `
-            <div>
-            The exponent for the "Input unit prefix" <b>(${i})</b>
-            is
-            <select id="unitComparison">
-                <option value=""></option>
-                <option value="bigger">bigger</option>
-                <option value="smaller">smaller</option>
-            </select>
-            than the exponent for the "output unit prefix" <b>(${o})</b>.</br>This means that one 
-            <input type="text" id="singularUnit" placeholder="bigger unit" style="width: 120px;">
-            is made up of many 
-            <input type="text" id="pluralUnit" placeholder="smaller units" style="width: 120px;">.</br>
-            When converting from
-            <input type="text" id="inputUnit" placeholder="input unit" style="width: 120px;">
-            to
-            <input type="text" id="outputUnit" placeholder="output unit" style="width: 120px;">,
-            you will need 
-            <select id="unitComparison">
-                <option value=""></option>
-                <option value="more">more</option>
-                <option value="less">less</option>
-            </select>
-            of the output units to be the same size as the input units.
-             </br>
-            I expect the exponent of my answer to be 
-            <select id="exponentComparison">
-                <option value=""></option>
-                <option value="bigger">bigger</option>
-                <option value="smaller">smaller</option>
-            </select>
-            than the exponent of the question <b>(${quesN})</b>.
-        </div>`
 }
 
 function reset() {
@@ -262,10 +237,6 @@ function showHint() {
         </table>
         ` 
     hint.innerHTML = tableHTML;
-}
-
-function showNumberHint() {
-    document.getElementById("quesM").style.backgroundColor = "lightcoral";
 }
 
 function showNumberHint() {

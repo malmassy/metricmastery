@@ -4,82 +4,51 @@ body {
     padding: 0;
     font-family: 'Roboto', sans-serif;
     background-color: #f9fafc;
-    color: #333;
+    color: darkslategray;
     text-align: center;
 }
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(to right, #6acb11, #25fc75);
+    background: linear-gradient(to right, forestgreen, lightgreen); /* green to lime green */
     color: white;
-    padding: 50px 20px;
-}
-
-.hero h1 {
-    margin: 0;
-    font-size: 2.5em;
-}
-
-.hero p {
-    margin-top: 10px;
-    font-size: 1.2em;
-}
-.problem {
-    background-color: #e8f0fe;
-    border: 1px solid #cbd5e1;
-    padding: 15px;
-    margin: 20px auto;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 8px;
-    font-size: 1.2em;
+    padding: 10px 20px;
 }
 
 /* Navbar */
 .navbar {
     display: flex;
     justify-content: center;
-    background-color: #ffffff;
+    background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px;
     position: sticky;
-    top: 0;
     z-index: 1000;
+    top: 0;
 }
 
 .nav-link {
     margin: 0 15px;
     text-decoration: none;
-    font-size: 1em;
-    color: #4CAF50;
+    color: forestgreen;
     transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #2575fc;
+    color: navy;
 }
 
-/* Footer */
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-    margin-top: 30px;
+/* Rounded box to display a question in */
+.problem {
+    display: inline-block;
+    background-color: aliceblue;
+    border: 1px solid cadetblue;
+    padding: 20px 60px;
+    margin: auto;
+    max-width: 70%;
+    border-radius: 8px;
 }
 
-footer p {
-    margin: 0;
-    font-size: 0.9em;
-}
-
-footer a {
-    color: #6a11cb;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
 table {
     display: block;
     margin: auto;
@@ -196,10 +165,10 @@ label {
 .input-group {
     display: flex;
     flex-direction: column;
+    max-width: 300px;
 }
 
 .input-box {
-    max-width: 300px;
     padding: 10px;
     margin: 5px 5px 5px 0;
     font-size: 1em;

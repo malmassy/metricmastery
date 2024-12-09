@@ -1,8 +1,4 @@
-window.onload = function() {
-    generateTable();
-}
-
-const metricPrefixes = {
+var metricPrefixes = {
 	yotta: {symbol: 'Y', exponent: 24, hint: 'Your'},
 	zetta: {symbol: 'Z', exponent: 21, hint: 'Zebra'},
 	exa: {symbol: 'E', exponent: 18, hint: 'Eats'},
@@ -13,7 +9,7 @@ const metricPrefixes = {
 	kilo: {symbol: 'k', exponent: 3, hint: 'killed'},
 	hecto: {symbol: 'h', exponent: 2, hint: 'his'},
 	deka: {symbol: 'da', exponent: 1, hint: 'dad'},
-	base: {symbol: '', exponent: 0, hint: '-'},
+	base: {symbol: '', exponent: 0, hint: '-', word: ''},
 	deci: {symbol: 'd', exponent: -1, hint: 'did'},
 	centi: {symbol: 'c', exponent: -2, hint: "canada's"},
 	milli: {symbol: 'm', exponent: -3, hint: 'military'},
@@ -26,7 +22,7 @@ const metricPrefixes = {
 	yocto: {symbol: 'y', exponent: -24, hint: 'years'}
 }
 
-export function generateTable() {
+function generateTable() {
     let table = '<table>';
     table += '<thead><tr><th>Symbol</th><th>Exponent</th><th>Prefix</th><th style="text-align: left;">Hint</th></tr></thead><tbody>';
 
