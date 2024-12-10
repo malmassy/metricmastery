@@ -8,10 +8,8 @@ const units = {
     meters: {symbol: 'm'},
     grams: {symbol: 'g'}, 
     liters: {symbol: 'L'},
-    seconds: {symbol: 's'}
+    seconds: {symbol: 's'},
 };
-
-const unitsMap = Object.values(units).map(obj => obj.symbol);
 
 
 // Allow for basic units, units-squared or units-cubed.
@@ -72,11 +70,20 @@ function generateProblem() {
     reset();
     quesM = getRandomNumber(1, 10, 2); // Random number with 2 decimals
     quesN = getRandomInteger(-10, 10); // Random integer between -10 and 10
-    u = getRandomElement(unitsMap);
+    unit = getRandomElement(Object.keys(units));
 
-    i = metricPrefixes[inputPrefix]['symbol']; // Random prefix for "a"
+    console.log(unit);
 
-    o = metricPrefixes[outputPrefix]['symbol']; // Random prefix for "b"
+    if (wordOrSymbol == 'symbol') {
+        i = metricPrefixes[inputPrefix]['symbol']; // Random prefix for "a"
+        o = metricPrefixes[outputPrefix]['symbol']; // Random prefix for "b"  
+        u = units[unit]['symbol'];      
+    } else {
+        i = inputPrefix == 'base' ? '' : inputPrefix;
+        o = outputPrefix == 'base' ? '' : outputPrefix;
+        u = unit;
+    }
+
     uExpText = getRandomElement(unitExpsArray);
 
     uExpVal = unitExps.get(uExpText);
@@ -262,9 +269,6 @@ function clearUnitHint() {
 function showUnitExpHint() {
     document.getElementById("uExpText1").style.backgroundColor = "aqua";
     document.getElementById("uExpText2").style.backgroundColor = "aqua";
-    if (uExpVal == 1) {
-        document.getElementById("noUnitExp").style.backgroundColor = "aqua";
-    }
     document.getElementById("ansUnitExp").style.backgroundColor = "aqua";
 }
 

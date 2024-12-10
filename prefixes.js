@@ -9,7 +9,7 @@ var metricPrefixes = {
 	kilo: {symbol: 'k', exponent: 3, hint: 'killed'},
 	hecto: {symbol: 'h', exponent: 2, hint: 'his'},
 	deka: {symbol: 'da', exponent: 1, hint: 'dad'},
-	base: {symbol: '', exponent: 0, hint: '-', word: ''},
+	base: {symbol: '', exponent: 0, hint: '-'},
 	deci: {symbol: 'd', exponent: -1, hint: 'did'},
 	centi: {symbol: 'c', exponent: -2, hint: "canada's"},
 	milli: {symbol: 'm', exponent: -3, hint: 'military'},
