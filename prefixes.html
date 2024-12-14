@@ -11,7 +11,7 @@
         });
     </script>
 </head>
-<body>
+<body onload="generateTable()">
     <div id="header-container"></div>
     <script>
         fetch('header.html')
@@ -20,5 +20,6 @@
             .catch(error => console.error('Error loading header:', error));
     </script>
     <div id='prefix-table'></div>
+    <script src="prefixes.js"></script>
 </body>
 </html>
