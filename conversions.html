@@ -13,49 +13,49 @@
             .then(data => document.getElementById('header-container').innerHTML = data)
             .catch(error => console.error('Error loading header:', error));
     </script>
-    <h1>Metric Conversion Practice</h1>
     <div class="problem" id="problem">
         Click "Generate" to get a new problem!
     </div>
-    <div>
-        <button class="button" onclick="generateProblem()">New Problem</button>  <button class="button" onclick="seePrefixes()">Prefix Table</button></br></br>
+    <div><button class="button" onclick="generateProblem()">New Problem</button></div>
+
+    <!-- Answer Section -->
+    <div class="answer-container">
+        <div>
+            <label for="answerInput">Your Answer:</label>
+            <input type="text" id="answerInput" class="problem" placeholder="Enter your answer here">
+        </div>
+        <div><button onclick="checkAnswer()">Submit Answer</button></div>
+        <div id="feedback" class="feedback"></div>
     </div>
 
-    <label for="ansM"><b>Your Answer:</b></label><br>
-    <div class="input-container">
-        <span class="input-group">
-            <input type="number" id="ansM" class="input-box" placeholder="Number" oninput="updateAnswer()">
-            <span id="hint-ansM" class="hint" onmouseover="showNumberHint()" onmouseleave="clearNumberHint()" >Hint</span>
-        </span> 
-        <span style="text-align: center; font-size: 2em; padding: 5px;">× 10</span>
-        <span class="input-group">
-            <sup><input type="number" id="ansN" class="input-box" placeholder="Exponent" oninput="updateAnswer()" style="height: 5px;"></sup>
-            <span id="hint-ansN" class="hint" onmouseover="showShortExpHint()" onmouseleave="clearShortExpHint()">Hint</span>
-        </span>
-        <span class="input-group">
-            <input type="text" id="ansUnit" class="input-box" placeholder="Unit" oninput="updateAnswer()">
-            <span id="hint-ansUnit" class="hint" onmouseover="showUnitHint()" onmouseleave="clearUnitHint()">Hint</span>
-        </span> 
-        <span class="input-group">
-            <sup>
-            <input type="number" id="ansUnitExp" class="input-box" placeholder="Unit Exponent" oninput="updateAnswer()" style="height: 5px;">
-            </sup>
-            <span id="hint-ansUnitExp" class="hint" onmouseover="showUnitExpHint()" onmouseleave="clearUnitExpHint1()">Hint</span>
-        </span>
+    <!-- Collapsible Steps Section -->
+    <div id="steps-section">
+        <button type="button" class="collapsible"><b>Step 1:</b> If necessary, convert the value in the question to normalized scientific notation.</button>
+        <div class="content" id="step-1-hint"></div>
+        <button type="button" class="collapsible"><b>Step 2:</b> Recall the exponents for both prefixes.</button>
+        <div class="content" id="step-2-hint"></div>
+        <button type="button" class="collapsible"><b>Step 3:</b> Apply the algorithm to get the answer exponent.</button>
+        <div class="content" id="step-3-hint"></div>
+        <button type="button" class="collapsible"><b>Step 4:</b> Write your answer in scientific notation.</button>
+        <div class="content" id="step-4-hint"></div>
     </div>
-    <div id="answer"></div>
-    </br>
 
+    <script>
+        // JavaScript for collapsible sections
+        const collapsibles = document.querySelectorAll('.collapsible');
 
-
-    <button class="button" onclick="checkAnswer()">Check Answer</button> <button class="button-hint" id="button-hint" onclick="showHint()">Show Hints</button></body></br></br>
-    <div id="feedback" class="feedback"></div>
-    <div id="hint"></div>
-        <div class="input-container">
-        <label for="scratch-work">Do your scratch work here:</label><br>
-        <textarea rows="5" cols="40" type="text" id="scratch-work" class="input-box" placeholder="(&quot;Input&quot; - &quot;Output&quot;) * &quot;Unit Exponent&quot; + &quot;Question Exponent&quot; = Exponent" style="width: 40em;" autocorrect="off" autocapitalize="none">
-        </textarea>
-    </div>
+        collapsibles.forEach(collapsible => {
+            collapsible.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                } else {
+                    content.style.display = 'block';
+                }
+            });
+        });
+    </script>
     <script src="prefixes.js"></script>
     <script src="conversions.js"></script>
 </body>

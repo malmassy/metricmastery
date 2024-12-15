@@ -47,6 +47,7 @@ body {
     border: 1px solid cadetblue;
     padding: 20px 60px;
     margin: auto;
+    margin-top: 10px;
     max-width: 70%;
     border-radius: 8px;
 }
@@ -87,9 +88,8 @@ td:nth-child(2), td:nth-child(3) {
 button {
     display: inline-block;
     padding: 10px 20px;
-    background: linear-gradient(90deg, #4CAF50, #34a853);
+    background-color: forestgreen;
     color: white;
-    font-weight: bold;
     border: none;
     border-radius: 6px;
     padding: 10px 20px;
@@ -98,7 +98,7 @@ button {
     transition: background 0.3s ease;    
 }
 .button:hover {
-    background: linear-gradient(90deg, #34a853, #4CAF50);
+    background: darkseagreen;
 }
 
 .button-hint {
@@ -190,22 +190,18 @@ textarea {
 
 /* Collapsible Section */
 .collapsible {
-    background-color: #007BFF;
-    color: white;
-    font-size: 1em;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    margin: 10px auto;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
-    width: 80%;
-    max-width: 600px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 16px;
+    margin: 5px;
 }
 
 .collapsible:hover {
-    background-color: #0056b3;
+    background-color: mediumseagreen;
 }
 
 .collapsible:after {
@@ -219,21 +215,17 @@ textarea {
 }
 
 .content {
+    padding: 0 10px;
     display: none;
     overflow: hidden;
-    padding: 10px;
-    border: 1px solid #cbd5e1;
-    background-color: #f9fafc;
-    border-radius: 6px;
-    margin: 10px auto;
-    width: 80%;
-    max-width: 600px;
-    line-height: 2;
+    background-color: #f9f9f9;
+    border-left: 3px solid #ccc;
     text-align: left;
 }
 
 /* Feedback Section */
 .feedback {
+    display: none;
     background-color: #ffecb3;
     border: 1px solid #ffe082;
     padding: 15px;
@@ -353,4 +345,10 @@ li {
 }
 .how-to-read li {
   margin: 5px 0;
+}
+
+#answerInput {
+    font-family: 'Roboto', sans-serif;
+    color: darkslategray;
+    font-size: 1.0em;
 }

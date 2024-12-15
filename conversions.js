@@ -1,308 +1,248 @@
+// Runs when the page is loaded
 window.onload = function() {
     generateProblem();
-}
-
-const prefixesMap = Object.values(metricPrefixes).map(obj => obj.symbol);
-
-const units = {
-    meters: {symbol: 'm'},
-    grams: {symbol: 'g'}, 
-    liters: {symbol: 'L'},
-    seconds: {symbol: 's'},
 };
 
+// Constants
+const units = {
+    meters: { symbol: 'm' },
+    grams: { symbol: 'g' },
+    liters: { symbol: 'L' },
+};
 
-// Allow for basic units, units-squared or units-cubed.
-const unitExps = new Map([
-    ["", 1], ["2", 2], ["3", 3]
-]);
-const unitExpsArray = Array.from(unitExps.keys());
+// Variables to store problem details
+let quesM, quesN, inputPrefix, outputPrefix, unitExp;
+let uExpVal, iPrefixVal, oPrefixVal, ansN;
 
-/*
-A problem takes the form "Convert m * 10^n i[u]^[uExp] to o[u]^[uExp]"
-
-"m" is a 2 decimal 1.00 <= m < 10.00.
-"n" is an integer +/-(1.00 <= n <= 10)
-"i" is the metric prefix on the input units (e.g. "c" for centi-)
-"o" is the metric prefex on the output units (e.g. "n" for nano-)
-"u" is the type of metric unit (e.g. "L" for liters, "m" or meters) (SAME FOR BOTH INPUT AND OUTPUT)
-"uExp" is whether the metric units are squared or cubed (SAME FOR BOTH INPUT AND OUTPUT)
-*/
-
-let quesM, quesN, i, o, u, uExpText; // Declare variables to store problem details
-let uExpVal, iPrefixVal, oPrefixVal, ansN; // Helpers to calculating the answer.
-
-
-// Function to generate random numbers between min and max
+// Utility Functions
 function getRandomNumber(min, max, decimals) {
-    const factor = Math.pow(10, decimals);
     return (Math.random() * (max - min) + min).toFixed(decimals);
 }
 
-// Function to pick a random element from an array
 function getRandomElement(array) {
-    const index = Math.floor(Math.random() * array.length);
-    return array[index];
+    return array[Math.floor(Math.random() * array.length)];
 }
 
-// Function to generate a random integer
 function getRandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Function to randomly decide unit type (basic, squared, or cubed)
-function getUnitType() {
-    return getRandomElement(unitExpsArray);
+function getValueForQuestion() {
+    quesM = getRandomNumber(1, 10, 2);
+    quesN = getRandomInteger(-7, 10);
+    return [quesM, quesN];
 }
 
-// Function to generate a new problem
-function generateProblem() {
-
-    inputPrefix = getRandomElement(Object.keys(metricPrefixes));
-    outputPrefix = getRandomElement(Object.keys(metricPrefixes));
-
-    while (outputPrefix == inputPrefix) {
-        outputPrefix = getRandomElement(Object.keys(metricPrefixes));
-    }
-
-    wordOrSymbol = getRandomElement(['word','symbol']);
-
-    reset();
-    quesM = getRandomNumber(1, 10, 2); // Random number with 2 decimals
-    quesN = getRandomInteger(-10, 10); // Random integer between -10 and 10
-    unit = getRandomElement(Object.keys(units));
-
-    console.log(unit);
-
-    if (wordOrSymbol == 'symbol') {
-        i = metricPrefixes[inputPrefix]['symbol']; // Random prefix for "a"
-        o = metricPrefixes[outputPrefix]['symbol']; // Random prefix for "b"  
-        u = units[unit]['symbol'];      
+function getValueFromSN(m, n) {
+    const value = m * Math.pow(10, n);
+    if (Math.abs(value) >= 1) {
+        return value.toLocaleString('en-US', { maximumFractionDigits: 4 });
     } else {
-        i = inputPrefix == 'base' ? '' : inputPrefix;
-        o = outputPrefix == 'base' ? '' : outputPrefix;
-        u = unit;
+        const decimalPlaces = Math.abs(n) + Math.floor(Math.log10(Math.abs(m))) + 2;
+        return value.toFixed(decimalPlaces > 0 ? decimalPlaces : 0).replace(/\.?0+$/, '');
+    }
+}
+
+function collapseAll() {
+    const collapsibles = document.querySelectorAll('.collapsible');
+
+    collapsibles.forEach(collapsible => {
+        collapsible.classList.remove('active');
+        const content = collapsible.nextElementSibling;
+        content.style.display = 'none';
+    });
+}
+
+function clearAnswerAndFeedback() {
+    document.getElementById('feedback').style.display = 'none';
+    document.getElementById('answerInput').value = '';
+
+}
+
+// Main Function to Generate Problems
+function generateProblem() {
+    collapseAll();
+    clearAnswerAndFeedback();
+
+    const unit = getRandomElement(Object.keys(units));
+    let unitExp = 1;
+
+    if (unit == 'meters') {
+        unitExp = getRandomInteger(1, 3);
     }
 
-    uExpText = getRandomElement(unitExpsArray);
+    // Generate prefixes for input and output
+    let inputPrefix, outputPrefix;
+    do {
+        inputPrefix = getRandomElement(Object.keys(metricPrefixes));
+        outputPrefix = getRandomElement(Object.keys(metricPrefixes));
+    } while (outputPrefix === inputPrefix || outputPrefix == 'micro');
 
-    uExpVal = unitExps.get(uExpText);
-    iPrefixVal = metricPrefixes[inputPrefix]['exponent'];
-    oPrefixVal = metricPrefixes[outputPrefix]['exponent']
+    // Generate question values
+    const quesM = getRandomNumber(1, 10, 2);
+    const quesN = getRandomInteger(-7, 10);
 
-    ansN = quesN + uExpVal * (iPrefixVal - oPrefixVal);
+    // Calculate the answer
+    const inputExp = metricPrefixes[inputPrefix].exponent;
+    const outputExp = metricPrefixes[outputPrefix].exponent;
+    const ansN = quesN + unitExp * (inputExp - outputExp);
 
-    // Ensure prefixes are different
-    // Don't let the output be "micro" so they don't have to type "mu"...
-    if (o === "&mu;" || Math.abs(ansN) > 41) {
+    // Avoid problematic cases
+    if (Math.abs(ansN) > 47) {
         return generateProblem();
     }
 
+    /*
+    console.log(quesM);
+    console.log(quesN);
+    console.log(ansN);
+    */
+
+    // Format the question
+    const useScientificNotation = Math.random() < 0.5;
+    const useFullUnitName = Math.random() < 0.5;
+    const quesDisplay = useScientificNotation
+        ? `${quesM} x 10<sup>${quesN}</sup>`
+        : `${getValueFromSN(quesM, quesN)}`;
+
+    let iDisplay;
+    let oDisplay;
+
+    let unitExpText;
+
+    if (unitExp == 2) {
+        unitExpText = "square ";
+    } else if (unitExp == 3) {
+        unitExpText = "cubic ";
+    } else {
+        unitExpText = "";
+    }
+
+    if (useFullUnitName) {
+        iDisplay = `${unitExpText}${inputPrefix === 'base' ? '' : inputPrefix}${unit}`;
+        oDisplay = `${unitExpText}${outputPrefix === 'base' ? '' : outputPrefix}${unit}`;
+    } else {
+        iDisplay = `${metricPrefixes[inputPrefix].symbol}${units[unit].symbol}<sup>${unitExp == 1 ? '' : unitExp}</sup>`;
+        oDisplay = `${metricPrefixes[outputPrefix].symbol}${units[unit].symbol}<sup>${unitExp == 1 ? '' : unitExp}</sup>`;
+    }
+
     // Display the problem
-    const problemElement = document.getElementById("problem");
-    problemElement.innerHTML = `Convert 
-        <span id="quesM">${quesM}</span>
-         × 10<span id="quesN"><sup>${quesN}</sup></span> 
-        <span id="i">${i}</span>${u}<span id="uExpText1"><sup>${uExpText}</sup></span>
-        to <span id="o">${o}${u}</span><span id="uExpText2"><sup>${uExpText}</sup></span>.`;
+    const problemElement = document.getElementById('problem');
+    problemElement.innerHTML = `Convert ${quesDisplay} ${iDisplay} to ${oDisplay}.`;
 
-    // Clear previous inputs and feedback
-    document.getElementById("ansM").value = "";
-    document.getElementById("ansN").value = "";
-    document.getElementById("ansUnit").value = "";
-    document.getElementById("ansUnitExp").value = "";
+    // Save problem details for validation
+    window.problemDetails = { quesM, quesN, ansN, unit, inputPrefix, outputPrefix, unitExp };
+
+    updateStepOneHint(useScientificNotation, quesM, quesN);
+    updateStepTwoHint(inputPrefix, outputPrefix);
+    updateStepThreeHint(inputExp, outputExp, unitExp, quesN, ansN);
+    updateStepFourHint(quesM, ansN, oDisplay);
 }
 
-function reset() {
-    usedHint = false;
-    document.getElementById("answer").innerHTML="";
-    document.getElementById("hint").innerHTML="";
-    document.getElementById("button-hint").innerHTML="Show Hints";
-    document.getElementById("ansM").style.backgroundColor = "";
-    document.getElementById("ansN").style.backgroundColor = "";
-    document.getElementById("ansUnit").style.backgroundColor = "";
-    document.getElementById("ansUnitExp").style.backgroundColor = "";
-    document.getElementById("feedback").innerHTML = "";
-    document.getElementById("scratch-work").value = "";
+function updateStepOneHint(useScientificNotation, quesM, quesN) {
+    const stepOneHint = document.getElementById('step-1-hint');
+    let hint;
+
+    if (useScientificNotation) {
+        hint = `${quesM} x 10<sup><b>${quesN}</b></sup> is already in scientific notation. Proceed to Step 2.`;
+    } else {
+        hint = `${getValueFromSN(quesM, quesN)} = <b>${quesM} x 10<sup><b>${quesN}</b></sup></b>.`;
+    }
+
+    stepOneHint.innerHTML = hint;
 }
 
-function updateAnswer() {
-    let answer = document.getElementById("answer");
-    let input_question = `
-        <span id="quesM">${quesM}</span>
-         × 10<span id="quesN"><sup>${quesN}</sup></span> 
-        <span id="i">${i}</span>${u}<span id="uExpText1"><sup>${uExpText}</sup></span>`;
+function updateStepTwoHint(inputPrefix, outputPrefix) {
+    const stepTwoHint = document.getElementById('step-2-hint');
+    let hint;
 
-    answer.innerHTML = `<i>${input_question} =</i> <b>${document.getElementById("ansM").value} x 10<sup>${document.getElementById("ansN").value}</sup>
-    ${document.getElementById("ansUnit").value}<sup>${document.getElementById("ansUnitExp").value}</sup></b>
-    `;
+    hint = `${inputPrefix}, ${metricPrefixes[inputPrefix].symbol}, <b>${metricPrefixes[inputPrefix].exponent}</b>
+            </br>
+            ${outputPrefix}, ${metricPrefixes[outputPrefix].symbol}, <b>${metricPrefixes[outputPrefix].exponent}</b>`;
+
+    stepTwoHint.innerHTML = hint;
 }
 
-// Function to check the student's answer
+function updateStepThreeHint(inputExp, outputExp, unitExp, quesN, ansN) {
+    const stepThreeHint = document.getElementById('step-3-hint');
+    let hint = `<p>
+        "I" Input Prefix Exponent: ${inputExp}</br>
+        "O" Output Prefix Exponent: ${outputExp}</br>
+        "U" Unit Exponent: ${unitExp}</br>
+        "Q" Question Value Exponent:  ${quesN}</br></br>
+        (I - O) x U + Q &rarr;
+        [ (<u>${inputExp}</u> - <u>${outputExp}</u>) x <u>${unitExp}</u> + <u>${quesN}</u> ] = <b>${ansN}</b>.
+    </p>`;
+
+    stepThreeHint.innerHTML = hint;
+}
+
+function updateStepFourHint(quesM, ansN, oDisplay) {
+    const stepFourHint = document.getElementById('step-4-hint');
+    let hint = `${quesM} x 10<sup>${ansN}</sup> ${oDisplay}.`;
+
+    stepFourHint.innerHTML = hint;
+}
+
 function checkAnswer() {
-    const ansMSubmit = document.getElementById("ansM").value;
-    const ansNSubmit = document.getElementById("ansN").value; // Currently not validated
-    const ansUnitSubmit = document.getElementById("ansUnit").value;
-    const ansUnitExpSubmit = document.getElementById("ansUnitExp").value;
+    document.getElementById('feedback').style.display = 'inline-block';
 
-    const ansM = quesM;
-    // const ans2 = n + unitExps.get(uExp) * (prefixes.get(i) - prefixes.get(o));
-    const ansUnit = o + u;
-    const ansUnitExp = uExpText;
+    const answer = document.getElementById('answerInput').value.trim();
+    const feedbackElement = document.getElementById('feedback');
 
-    let feedback = document.getElementById("feedback");
-    let correct = true;
+    const regex = /^([0-9]\.[\d]+)\s?(?:[xX]\s?10)\s?\^(-?\d+)\s?([a-zA-Z]+)(?:\^([1-9]))?(?:[\s\.]*)$/;
+    const match = answer.match(regex);
 
-    document.getElementById("ansM").style.backgroundColor = "";
-    document.getElementById("ansN").style.backgroundColor = "";
-    document.getElementById("ansUnit").style.backgroundColor = "";
-    document.getElementById("ansUnitExp").style.backgroundColor = "";
-    
-    // Check each answer and update background color
-    if (ansMSubmit == ansM) {
-        document.getElementById("ansM").style.backgroundColor = "lightgreen";
-    } else {
-        // console.log(`Number: Answered ${ansMSubmit} instead of ${ansM}.`);
-        document.getElementById("ansM").style.backgroundColor = "lightcoral";
-        correct = false;
-    }
+    let ansM, base, ansN, ansUnits, ansUnitsExp;
 
-    if (ansNSubmit == ansN) {
-        document.getElementById("ansN").style.backgroundColor = "lightgreen";
-    } else {
-        // console.log(`Exponent: Answered ${ansNSubmit} instead of ${ansN}.`);
-        document.getElementById("ansN").style.backgroundColor = "lightcoral";
-        correct = false;
-    }
+    if (!match) {
+        feedbackElement.style.textAlign = "left";
+        feedbackElement.innerHTML = `
+            Your answer does not appear to be properly formatted.</br></br>
+            It should be something like:</br>1.23 x 10^5 cm^2</br>1.23x10^4 deciliters.
+            `;
 
-    if (ansUnitSubmit == ansUnit) {
-        document.getElementById("ansUnit").style.backgroundColor = "lightgreen";
-    } else {
-        // console.log(`unitExps: Answered ${ansUnitSubmit} instead of ${ansUnit}.`);
-        document.getElementById("ansUnit").style.backgroundColor = "lightcoral";
-        correct = false;
-    }
-    if (ansUnitExpSubmit == ansUnitExp || (ansUnitExpSubmit == 1 && ansUnitExp =="")) {
-        document.getElementById("ansUnitExp").style.backgroundColor = "lightgreen";
-    } else {
-        // console.log(`Power: Answered ${ansUnitExpSubmit} instead of ${ansUnitExp}.`);
-        document.getElementById("ansUnitExp").style.backgroundColor = "lightcoral";
-        correct = false;
-    }
-
-    ansCompareText = (ansNSubmit > quesN) ? 'greater' : 'less';
-    unitsCompareText = (oPrefixVal > iPrefixVal) ? 'bigger' : 'smaller';
-
-    // Provide feedback
-    if (correct) {
-        feedback.innerHTML = "Correct! Well done!";
-        feedback.className = "feedback correct";
-    } else {
-        feedback.innerHTML = "Incorrect. Try again!";
-        feedback.className = "feedback incorrect";
-    }
-}
-
-// Function to open a new window with the prefixes table
-function seePrefixes() {
-    const newWindow = window.open('prefixes.html', '', 'width=500,height=1600,resizable=yes,scrollbars=yes');
-}
-
-function showHint() {
-    let hint = document.getElementById("hint");
-    if (hint.innerHTML != "") {
-        hint.innerHTML = "";
-        document.getElementById("button-hint").innerHTML="Show Hints";
         return;
     }
 
-    document.getElementById("button-hint").innerHTML="Hide Hints";
-
-    const tableHTML = `
-        <table class="table" style="justify-content: left;">
-            <tr><td><b>Number</b></td><td>For number, just pull the number from the question down. <span onmouseover="showNumberHint()" onmouseleave="clearNumberHint()"><u>Hint</u></span></td>
-            <tr><td><b>Unit</b></td><td>For unit, just pull the output units from the question down. <span onmouseover="showUnitHint()" onmouseleave="clearUnitHint()"><u>Hint</u></span></td>
-            <tr><td><b>Unit Exponent</b></td><td>For unit exponent, just pull the unit exponent from the question down.</br><span id="noUnitExp">If there is no unit exponent, just leave it blank.</span> <span onmouseover="showUnitExpHint()" onmouseleave="clearUnitExpHint()"><u>Hint</u></span></td>
-            <tr><td><b>Exponent</b></td><td>
-            <table style="width: 90%;">
-            <tr><td>Input Prefix</td><td>${i} = ${iPrefixVal}</td></tr>
-            <tr><td>Output Prefix</td><td>${o} = ${oPrefixVal}</td></tr>
-            <tr><td>Unit Exponent</td><td>${uExpVal}</td></tr>
-            <tr><td>Question Exponent</td><td>${quesN}</td></tr>
-            <tr style="line-height: 1.5;"><td><b>Answer Exponent</b></td><td>
-                <div>(${iPrefixVal} - ${oPrefixVal}) * ${uExpVal} + ${quesN}</div>
-                <div>(${iPrefixVal - oPrefixVal}) * ${uExpVal} + ${quesN}</div>
-                <div>${(iPrefixVal - oPrefixVal) * uExpVal} + ${quesN}</div>
-
-            <b><div id="expHint" onmouseover="showExpHint()" onmouseleave="clearExpHint()"><u>${ansN}</u></b>
-            </td></tr>
+    ansM = match[1];
+    ansN = match[2];
+    ansUnits = match[3];
+    ansUnitsExp = (match[4] == null ? 1 : match[4]);
+    console.log(`ansM: ${ansM}\nansN: ${ansN}\nansUnits: ${ansUnits}\nansUnitsExp: ${ansUnitsExp}`);
+    console.log(`corrM: ${window.problemDetails.quesM}\ncorrN: ${window.problemDetails.ansN}\ncorrUnitExp: ${window.problemDetails.unitExp}`);
+    
+    let acceptableUnits = [
+        `${window.problemDetails.outputPrefix === 'base' ? '' : window.problemDetails.outputPrefix}${window.problemDetails.unit}`,
+        `${metricPrefixes[window.problemDetails.outputPrefix].symbol}${units[window.problemDetails.unit].symbol}`
+        ];
 
 
-
-            </table>
-            </td></tr>
-        </table>
-        ` 
-    hint.innerHTML = tableHTML;
-}
-
-function showNumberHint() {
-    document.getElementById("quesM").style.backgroundColor = "aqua";
-    document.getElementById("ansM").style.backgroundColor = "aqua";
-}
-
-function clearNumberHint() {
-    document.getElementById("quesM").style.backgroundColor = "";
-    document.getElementById("ansM").style.backgroundColor = "";    
-}
-
-function showUnitHint() {
-    document.getElementById("o").style.backgroundColor = "aqua";
-    document.getElementById("ansUnit").style.backgroundColor = "aqua";
-}
-
-function clearUnitHint() {
-    document.getElementById("o").style.backgroundColor = "";
-    document.getElementById("ansUnit").style.backgroundColor = "";    
-}
-
-function showUnitExpHint() {
-    document.getElementById("uExpText1").style.backgroundColor = "aqua";
-    document.getElementById("uExpText2").style.backgroundColor = "aqua";
-    document.getElementById("ansUnitExp").style.backgroundColor = "aqua";
-}
-
-function clearUnitExpHint() {
-    document.getElementById("uExpText1").style.backgroundColor = "";
-    document.getElementById("uExpText2").style.backgroundColor = "";
-    document.getElementById("ansUnitExp").style.backgroundColor = "";
-    document.getElementById("noUnitExp").style.backgroundColor = "";
-}
-
-function clearUnitExpHint1() {
-    document.getElementById("uExpText1").style.backgroundColor = "";
-    document.getElementById("uExpText2").style.backgroundColor = "";
-    document.getElementById("ansUnitExp").style.backgroundColor = "";
-}
-
-function showExpHint() {
-    document.getElementById("expHint").style.backgroundColor = "aqua";
-    document.getElementById("ansN").style.backgroundColor = "aqua";
-}
-
-function clearExpHint() {
-    document.getElementById("expHint").style.backgroundColor = "";
-    document.getElementById("ansN").style.backgroundColor = "";    
-}
+    mCorrect = ansM == window.problemDetails.quesM;
+    nCorrect = ansN == window.problemDetails.ansN;
+    unitsCorrect = acceptableUnits.includes(ansUnits);
+    unitExpCorrect = ansUnitsExp == window.problemDetails.unitExp;
 
 
-function showShortExpHint() {
-    document.getElementById("ansN").style.backgroundColor = "aqua";
-    document.getElementById("hint-ansN").innerHTML = `(${iPrefixVal} - ${oPrefixVal}) * ${uExpVal} + ${quesN} = ${ansN}`;
-}
+    // Generate feedback for each component
+    const feedbackItems = [
+        { correct: mCorrect, label: 'Mantissa' },
+        { correct: nCorrect, label: 'Exponent' },
+        { correct: unitsCorrect, label: 'Units' },
+        { correct: unitExpCorrect, label: 'Unit Exponent' },
+    ];
 
-function clearShortExpHint() {
-    document.getElementById("ansN").style.backgroundColor = ""; 
-    document.getElementById("hint-ansN").innerHTML = "Hint";
+    feedbackElement.innerHTML = feedbackItems.map(item => `
+        <div class="feedback-item">
+            <span>${item.correct ? '✅' : '❌'}</span>
+            <span>${item.label}</span>
+        </div>
+    `).join('');
 
+    // Overall feedback
+    if (feedbackItems.every(item => item.correct)) {
+        feedbackElement.innerHTML += '<div class="feedback-item correct">✅ Correct! Well done!</div>';
+    } else {
+        feedbackElement.innerHTML += '<div class="feedback-item incorrect">❌ Incorrect. Please try again.</div>';
+    }
 }
