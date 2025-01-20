@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handouts</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header-container').innerHTML = data)
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+    <h1>Handouts</h1>
+
+    <table>
+        <tbody>
+            <tr><td><a href="./handouts/Conversions with Ratio Units.pdf">Conversions with Ratio Units</a></td></tr>
+            <tr><td><a href="./handouts/Converting Between Meters and Liters.pdf">Converting Between Meters and Liters</a></td></tr>
+        </tbody>
+    </table>
+    <footer>
+    </footer>
+    <script>
+        function toggleFormula(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('show');
+        }
+
+        function toggleAll(action) {
+            const formulas = document.querySelectorAll('.formula');
+            formulas.forEach(formula => {
+                formula.classList[action === 'show' ? 'add' : 'remove']('show');
+            });
+        }
+    </script>
+</body>
+</html>
