@@ -348,7 +348,10 @@ li {
 }
 
 #answerInput {
+    background: transparent;
+    border: none;
     font-family: 'Roboto', sans-serif;
     color: darkslategray;
     font-size: 1.0em;
+    width: 8em;
 }

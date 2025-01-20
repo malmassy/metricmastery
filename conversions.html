@@ -20,24 +20,29 @@
 
     <!-- Answer Section -->
     <div class="answer-container">
-        <div>
-            <label for="answerInput">Your Answer:</label>
-            <input type="text" id="answerInput" class="problem" placeholder="Enter your answer here">
+        <div class="problem">
+            <input type="text" id="answerInput" placeholder="Your answer">
+            <span id="unitDisplay">answer units</span>
         </div>
-        <div><button onclick="checkAnswer()">Submit Answer</button></div>
+        <div><button class="button" onclick="checkAnswer()">Submit Answer</button></div>
         <div id="feedback" class="feedback"></div>
     </div>
 
     <!-- Collapsible Steps Section -->
     <div id="steps-section">
+        <button type="button" class="collapsible" id="stepZero" style="background: blue;"><b>Step 0:</b> The problem uses complex units (i.e. units that have a numerator and denominator).</button>
+        <div class="content" id="step-0-hint"></div>
         <button type="button" class="collapsible"><b>Step 1:</b> If necessary, convert the value in the question to normalized scientific notation.</button>
         <div class="content" id="step-1-hint"></div>
-        <button type="button" class="collapsible"><b>Step 2:</b> Recall the exponents for both prefixes.</button>
+        <button type="button" class="collapsible"><b>Step 2:</b> Recall the exponents for both prefixes (if the units are a ratio, use the units from the <b>numerator</b> of each ratio).</button>
         <div class="content" id="step-2-hint"></div>
         <button type="button" class="collapsible"><b>Step 3:</b> Apply the algorithm to get the answer exponent.</button>
         <div class="content" id="step-3-hint"></div>
+        <button type="button" class="collapsible" id="stepThreeB" style="background: blue;"><b>Step 3b:</b> <b>"CIA"</b> with the denominator units to get your final answer.</button>
+        <div class="content" id="step-3b-hint"></div>
         <button type="button" class="collapsible"><b>Step 4:</b> Write your answer in scientific notation.</button>
         <div class="content" id="step-4-hint"></div>
+
     </div>
 
     <script>
