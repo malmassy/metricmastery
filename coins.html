@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metric Mastery - Coins</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header-container').innerHTML = data)
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+    <h1>Coins</h1>
+
+    <div class="controls">
+        <button onclick="toggleAll('show')">Show All</button>
+        <button onclick="toggleAll('hide')">Hide All</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 5%;">Coin</th>
+                <th>Diameter</th>
+                <th>Thickness</th>
+                <th>Mass</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Dime</td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('diam-dime')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="diam-dime">1.79cm</span>
+                </td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('thick-dime')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="thick-dime">1.35mm</span>
+                </td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('mass-dime')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="mass-dime">2.27g</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Penny</td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('diam-penny')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="diam-penny">1.9cm</span>
+                </td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('thick-penny')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="thick-penny">1.52mm</span>
+                </td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('mass-penny')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="mass-penny">2.5g</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Nickel</td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('diam-nickel')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="diam-nickel">2.2cm</span>
+                </td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('thick-nickel')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="thick-nickel">1.95mm</span>
+                </td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('mass-nickel')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="mass-nickel">5g</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Quarter</td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('diam-qtr')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="diam-qtr">2.4cm</span>
+                </td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('thick-qtr')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="thick-qtr">1.75mm</span>
+                </td>
+                <td>
+                    <button class="toggle-btn" onclick="toggleFormula('mass-qtr')" aria-label="Toggle formula">Show/Hide</button>
+                    <span class="formula" id="mass-qtr">5.67g</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <footer>
+    </footer>
+    <script>
+        function toggleFormula(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('show');
+        }
+
+        function toggleAll(action) {
+            const formulas = document.querySelectorAll('.formula');
+            formulas.forEach(formula => {
+                formula.classList[action === 'show' ? 'add' : 'remove']('show');
+            });
+        }
+    </script>
+</body>
+</html>
