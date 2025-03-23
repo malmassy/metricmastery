@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Frequency Counter</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+    }
+    #counter {
+      font-size: 100px;
+      margin: 20px;
+    }
+    .button {
+      padding: 15px 30px;
+      font-size: 24px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    #buttonContainer {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="counter">0</div>
+  <div id="buttonContainer">
+    <button class="button" id="startButton">START</button>
+    <button class="button" id="pauseButton">PAUSE</button>
+    <button class="button" id="resetButton">RESET</button>
+  </div>
+
+  <script>
+    // Set frequency in Hz here
+    const frequencyHz = 2; // 2 times per second
+    const intervalMs = 1000 / frequencyHz;
+
+    let count = 0;
+    let intervalId = null;
+
+    const counterEl = document.getElementById('counter');
+    const startButton = document.getElementById('startButton');
+    const pauseButton = document.getElementById('pauseButton');
+    const resetButton = document.getElementById('resetButton');
+
+    startButton.addEventListener('click', () => {
+      if (intervalId !== null) return; // Don't start again if already running
+
+      intervalId = setInterval(() => {
+        count++;
+        counterEl.textContent = count;
+      }, intervalMs);
+    });
+
+    pauseButton.addEventListener('click', () => {
+      clearInterval(intervalId);
+      intervalId = null;
+    });
+
+    resetButton.addEventListener('click', () => {
+      clearInterval(intervalId);
+      intervalId = null;
+      count = 0;
+      counterEl.textContent = count;
+    });
+  </script>
+
+</body>
+</html>
