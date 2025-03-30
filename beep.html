@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Beep Timer</title>
+</head>
+<body>
+  <h1>Beep Timer</h1>
+  <p>Click "Start Beeping" and try to guess the interval between the beeps.</p>
+  <button id="startButton">Start Beeping</button>
+  <button id="stopButton" disabled>Stop Beeping</button>
+
+  <script>
+    const intervalSeconds = 3.33; // Set your desired interval here
+    let beepInterval = null;
+
+    function beep() {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(1000, ctx.currentTime);
+      gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
+
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+
+      oscillator.start();
+      oscillator.stop(ctx.currentTime + 0.1);
+    }
+
+    document.getElementById('startButton').addEventListener('click', () => {
+      if (beepInterval === null) {
+        beep(); // Initial beep
+        beepInterval = setInterval(beep, intervalSeconds * 1000);
+        document.getElementById('startButton').disabled = true;
+        document.getElementById('stopButton').disabled = false;
+      }
+    });
+
+    document.getElementById('stopButton').addEventListener('click', () => {
+      clearInterval(beepInterval);
+      beepInterval = null;
+      document.getElementById('startButton').disabled = false;
+      document.getElementById('stopButton').disabled = true;
+    });
+  </script>
+</body>
+</html>
