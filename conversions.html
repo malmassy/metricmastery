@@ -13,10 +13,11 @@
             .then(data => document.getElementById('header-container').innerHTML = data)
             .catch(error => console.error('Error loading header:', error));
     </script>
-    <div class="problem" id="conversion-stats">
+    <div id="conversion-stats">
         <span id="timer">Time: 0.0 s</span>
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <span id="score"></span>
+        </br>
     </div>
     <div class="problem" id="problem">
         Click "Generate" to get a new problem!
