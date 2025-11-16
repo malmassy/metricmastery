@@ -408,5 +408,6 @@ function checkAnswer() {
         incrementCorrectCount();
     } else {
         feedbackElement.innerHTML += '<div class="feedback-item incorrect">❌ Incorrect. Please try again.</div>';
+        incrementOverallCount();
     }
 }
