@@ -3,6 +3,14 @@ window.onload = function() {
     generateProblem();
 };
 
+// ----- Session stats -----
+let correctCount = 0;
+let overallCount = 0;
+
+// ----- Timer state -----
+let timerInterval = null;
+let elapsedMs = 0;
+
 // Constants
 const units = {
     meters: { symbol: 'm' },
@@ -20,6 +28,52 @@ const unitExponents = {
 let quesM, quesN, numeratorUnits, numInputPrefix, numOutputPrefix, numUnitExp;
 let hasDenominatorUnits = false, denInputPrefix = 'base', denOutputPrefix = 'base', denUnitExp = 'base';
 let useScientificNotation, useFullUnitName;
+
+function updateTimerDisplay() {
+  const seconds = (elapsedMs / 1000).toFixed(1); // 1 decimal place
+  const timerEl = document.getElementById('timer');
+  if (timerEl) {
+    timerEl.textContent = `Time: ${seconds} s`;
+  }
+}
+
+function startTimer() {
+  // reset and start a fresh timer for the new problem
+  if (timerInterval !== null) {
+    clearInterval(timerInterval);
+  }
+  elapsedMs = 0;
+  updateTimerDisplay();
+
+  timerInterval = setInterval(() => {
+    elapsedMs += 100; // 0.1s
+    updateTimerDisplay();
+  }, 100);
+}
+
+function stopTimer() {
+  if (timerInterval !== null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+}
+
+function incrementCorrectCount() {
+  correctCount += 1;
+  const scoreEl = document.getElementById('score');
+  if (scoreEl) {
+    scoreEl.textContent = `Correct this session: ${correctCount} out of ${overallCount}`;
+  }
+}
+
+function incrementOverallCount() {
+    overallCount += 1;
+    const scoreEl = document.getElementById('numQuestions');
+    if (scoreEl) {
+        scoreEl.textContent = `Correct this session: ${correctCount} out of ${overallCount}`;
+    }
+}
+
 
 // Utility Functions
 function getRandomNumber(min, max, decimals) {
@@ -184,7 +238,7 @@ function generateProblem() {
     // Avoid problematic cases where the answer is too large.    
     do {
         setProblemValues();
-    } while (Math.abs(getAnswerN() > 47));
+    } while (Math.abs(getAnswerN() > 30));
 
     console.log(getAnswerN(true));
 
@@ -212,6 +266,8 @@ function generateProblem() {
     } else {
         document.getElementById('stepThreeB').style.display = 'none';
     }
+
+    startTimer();
 
 }
 
@@ -343,9 +399,13 @@ function checkAnswer() {
         </div>
     `).join('');
 
+    stopTimer();
+    incrementOverallCount();
+
     // Overall feedback
     if (feedbackItems.every(item => item.correct)) {
         feedbackElement.innerHTML += '<div class="feedback-item correct">✅ Correct! Well done!</div>';
+        incrementCorrectCount();
     } else {
         feedbackElement.innerHTML += '<div class="feedback-item incorrect">❌ Incorrect. Please try again.</div>';
     }
