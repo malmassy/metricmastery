@@ -68,7 +68,7 @@ function incrementCorrectCount() {
 
 function incrementOverallCount() {
     overallCount += 1;
-    const scoreEl = document.getElementById('numQuestions');
+    const scoreEl = document.getElementById('score');
     if (scoreEl) {
         scoreEl.textContent = `Correct this session: ${correctCount} out of ${overallCount}`;
     }
